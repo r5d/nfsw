@@ -15,35 +15,6 @@ from nfsw.db import get_db
 
 bp = Blueprint('auth', __name__)
 
-def login(username, password):
-    db = get_db()
-
-    user = db.execute('SELECT * FROM user WHERE username=?', (username,)
-    ).fetchone()
-
-    if user is None:
-        return {
-            'status': 'error',
-            'msg': 'User not found',
-            'fields': ['username']
-        }
-
-    if not check_password_hash(user['password'], password):
-        return {
-            'status': 'error',
-            'msg': 'Password is incorrect',
-            'fields': ['password']
-        }
-
-    session.clear()
-    session['user_id'] = user['id']
-
-    return {
-        'status': 'ok',
-        'url': url_for('hello')
-    }
-
-
 def register(username):
     db = get_db()
 

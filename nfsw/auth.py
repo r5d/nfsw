@@ -150,3 +150,11 @@ def terms():
     return render_template('terms.html')
 
 
+@bp.route('/sorry')
+@login_required
+@not_agreed
+def sorry():
+    session.clear()
+    return render_template('sorry.html')
+
+

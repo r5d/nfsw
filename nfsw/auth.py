@@ -13,7 +13,7 @@ from werkzeug.security import (
 from nfsw.db import get_db
 
 
-bp = Blueprint('auth', __name__, url_prefix='/auth')
+bp = Blueprint('auth', __name__)
 
 @bp.route('start', methods=('GET', 'POST'))
 def auth():

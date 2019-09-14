@@ -34,5 +34,12 @@ def create_app(test_config=None):
 
     app.register_blueprint(auth.bp)
 
+    # register io blueprint
+    from nfsw import io
+
+    app.register_blueprint(io.bp)
+    app.add_url_rule('/io', endpoint='io')
+
+
     return app
 

@@ -85,3 +85,48 @@ def login():
     return render()
 
 
+@bp.route('/register', methods=('GET', 'POST'))
+@anon_only
+def register():
+    def render(e=''):
+        if e:
+            flash(e)
+
+        return render_template('register.html')
+
+    db = get_db()
+
+    if request.method == 'POST':
+        print(request.form)
+
+        username = request.form['username']
+        password = request.form['password']
+
+        # Validate
+        if not username:
+            return render('Name is required')
+        elif db.execute('SELECT id FROM user where username=?',
+                        (username,)).fetchone() is not None:
+            return render('Name already taken')
+
+        # Generate password if empty.
+        if not password:
+            password = os.urandom(4).hex()
+
+
+        r = db.execute('INSERT INTO user (username, password)'
+                       ' VALUES (?, ?)',
+                       (username, generate_password_hash(password)))
+        db.commit()
+
+        if r.lastrowid < 1:
+            return render('Unable to create user')
+
+        session.clear()
+        session['user_id'] = r.lastrowid
+
+        return redirect(url_for('auth.terms'))
+
+    return render()
+
+

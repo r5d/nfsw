@@ -130,3 +130,23 @@ def register():
     return render()
 
 
+@bp.route('/terms', methods=('GET', 'POST'))
+@login_required
+@not_agreed
+def terms():
+    if request.method == 'POST':
+        if 'agree' not in request.form:
+            return redirect(url_for('auth.sorry'))
+
+        # Mark terms agreed.
+        db = get_db()
+        r = db.execute(
+            'UPDATE user SET terms_agreed=1 WHERE id=?',
+            (g.user['id'],))
+        db.commit()
+
+        return redirect(url_for('io'))
+
+    return render_template('terms.html')
+
+

@@ -38,3 +38,14 @@ def anon_only(view):
     return wrapped_view
 
 
+def not_agreed(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user['terms_agreed']:
+            return redirect(url_for('io'))
+
+        return view(**kwargs)
+
+    return wrapped_view
+
+

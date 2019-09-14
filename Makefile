@@ -10,6 +10,8 @@
 VENV_DIR=/usr/local/virtualenv/.dingy
 VENV_CMD=virtualenv-3
 
+dunno:
+	@echo "Give me somepin to make"
 
 dev:
 	pip install -r requirements.txt

@@ -15,30 +15,6 @@ from nfsw.db import get_db
 
 bp = Blueprint('auth', __name__)
 
-@bp.route('start', methods=('GET', 'POST'))
-def auth():
-    if request.method == 'POST':
-        username = request.form['username']
-
-        password = None
-        if 'password' in request.form:
-            password = request.form['password']
-
-        if not username:
-            return {
-                'status': 'error',
-                'msg': 'Name is required',
-                'fields': ['username']
-            }
-        elif username and password:
-            return login(username, password)
-
-        else:
-            return register(username)
-
-    return render_template('auth/index.html')
-
-
 def login(username, password):
     db = get_db()
 

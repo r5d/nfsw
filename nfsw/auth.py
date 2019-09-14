@@ -27,3 +27,14 @@ def login_required(view):
     return wrapped_view
 
 
+def anon_only(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is not None:
+            return redirect(url_for('io'))
+
+        return view(**kwargs)
+
+    return wrapped_view
+
+

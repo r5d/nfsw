@@ -7,7 +7,7 @@
 #   This file is part of dingy.
 #
 
-VENV_DIR=/usr/local/virtualenv/dingy
+VENV_DIR=/usr/local/virtualenv/.dingy
 VENV_CMD=virtualenv-3
 
 

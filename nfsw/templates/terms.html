@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Terms{% endblock %}
+
+{% block content %}
+<div class="terms-block">
+    <div class="msg-block">
+        <div class="msg">
+            <p></p>
+        </div>
+    </div>
+
+    <div class="meat">
+        <p>The nasty terms and conditions</p>
+    </div>
+
+    <form class="agree" method="post">
+        <div class="form-group agree">
+            <label for="agree">
+                <input type="checkbox" name="agree" class="agree" value="1">
+                I agree
+            </label>
+        </div>
+
+        <div class="button-group">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -6,8 +6,7 @@
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     </head>
     <body>
-        <script src="{{ url_for('static', filename='jquery.js') }}"></script>
-        <script src="{{ url_for('static', filename='nfsw.js') }}"></script>
+        {% block js %}{% endblock %}
 
         <section class="content">
             {% block content %}{% endblock %}

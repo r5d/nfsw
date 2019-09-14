@@ -158,3 +158,10 @@ def sorry():
     return render_template('sorry.html')
 
 
+@bp.route('/logout')
+@login_required
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
+

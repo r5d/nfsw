@@ -1,7 +1,7 @@
 from nfsw.auth import login_required, login_required_ajax
 
 from flask import (
-    Blueprint, render_template
+    Blueprint, render_template, request
 )
 
 bp = Blueprint('io', __name__)

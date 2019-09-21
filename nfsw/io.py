@@ -20,3 +20,9 @@ def query():
     return {
         'ans': cmd
     }
+
+
+def setup():
+    """Setup user's state"""
+    if not r().exists(k('scene')):
+        r().set(k('scene'), 'sexshop')

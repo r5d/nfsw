@@ -1,4 +1,10 @@
+import functools
+
+import nfsw.scenes as scenes
+
 from nfsw.auth import login_required, login_required_ajax
+from nfsw.redis import redis as r, key as k
+from nfsw.scenes import current_scene
 
 from flask import (
     Blueprint, render_template, request
@@ -27,10 +33,21 @@ def io():
 @login_required_ajax
 @preprocess
 def query():
-    cmd = request.get_data(as_text=True)
+    q = request.get_data(as_text=True)
 
+    # Log query.
+    r().rpush(k('log'), q)
+
+    # Get current scene.
+    scene = current_scene()
+    if scene is None:
+        return {
+            'ans': 'Your game state is fucked. Ping Siddharth.'
+        }
+
+    # Respond.
     return {
-        'ans': cmd
+        'ans': scene(q)
     }
 
 

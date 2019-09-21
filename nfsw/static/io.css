@@ -1,0 +1,62 @@
+body {
+    font-size: 1em;
+    overflow: hidden;
+    margin: 0 0 0 0;
+}
+
+.io-block {
+    height:98vh;
+    display:flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.console {
+    overflow-y: auto;
+    flex: 1 0 90%;
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.console p.concierge {
+    margin: 0 0 0 0;
+    border-left: 2px solid rgb(180,180,240);
+    padding-left: 5px;
+}
+
+.console p.user {
+    margin: 0 0 0px 0;
+    border-left: 2px solid rgb(180,240,180);
+    padding-left: 5px;
+}
+
+.console p.blank {
+    margin: 0 0 0 0;
+    border-left: 2px solid rgb(255,255,255);
+    padding-left: 5px;
+}
+
+.prompt {
+    flex: 1 0 auto;
+}
+
+.prompt form {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+
+    height: 98%;
+}
+
+.prompt input {
+    width: 95%;
+    height: 98%;
+    font-size: 1.2em;
+    padding-left: 5px;
+    border: 2px solid rgb(230,230,230);
+}
+
+.prompt input:focus {
+    outline-width: 0px;
+}

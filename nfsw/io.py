@@ -1,4 +1,4 @@
-from nfsw.auth import login_required
+from nfsw.auth import login_required, login_required_ajax
 
 from flask import (
     Blueprint, render_template

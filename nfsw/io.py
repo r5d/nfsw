@@ -8,5 +8,5 @@ bp = Blueprint('io', __name__)
 
 @bp.route('/io', endpoint='io')
 @login_required
-def console():
+def io():
     return render_template('io.html')

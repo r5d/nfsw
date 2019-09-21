@@ -14,3 +14,11 @@
     </div>
 </div>
 {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='io.css') }}">
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='io.js') }}"></script>
+{% endblock %}

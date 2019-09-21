@@ -6,6 +6,17 @@ from flask import (
 
 bp = Blueprint('io', __name__)
 
+
+def preprocess(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        setup()
+
+        return view(**kwargs)
+
+    return wrapped_view
+
+
 @bp.route('/io', endpoint='io')
 @login_required
 def io():

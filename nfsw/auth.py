@@ -27,6 +27,19 @@ def login_required(view):
     return wrapped_view
 
 
+def login_required_ajax(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return {
+                'msg': 'Permission denied'
+            }, 403
+
+        return view(**kwargs)
+
+    return wrapped_view
+
+
 def anon_only(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):

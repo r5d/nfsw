@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     window.qip = false;  // query in prograss flag.
     function query(q) {
-        if (window.qip) {
+        if (window.qip || window.iip) {
             return window.setTimeout(query, 10, q);
         }
         window.qip = true;
@@ -54,6 +54,64 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
         xhr.send(q);
+    }
+
+    window.iip = false;
+    function intro() {
+        if (window.qip) {
+            return window.setTimeout(intro, 10);
+        }
+        window.iip = true;
+
+        var iipoff = function() {
+            window.iip = false;
+        };
+        var spit = function(response, status) {
+            var r;
+            try {
+                r = JSON.parse(response);
+            } catch (e) {
+                return barfslow('💥God is busy sodomizing the waitress.' +
+                                '\nTry refreshing the page.', 'error', iipoff);
+            }
+
+            if (!('intro' in r)) {
+                return barfslow(
+                    '💥Too bad Dr. Gonad Dick is ' +
+                    '\ntoo busy whipping his eggplant.' +
+                    '\nTry refreshing the page.',
+                    'error',
+                    iipoff
+                );
+            }
+
+            if (status == 200) {
+                barfslow(r.intro, 'concierge', iipoff);
+            } else {
+                barfslow(r.intro, 'error', iipoff);
+            }
+        };
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/io/intro', true);
+
+        xhr.onreadystatechange = function() {
+            if (this.readyState != 4) {
+                return;
+            }
+
+            if ([200, 500].indexOf(this.status) >= 0) {
+                return spit(this.responseText, this.status);
+            } else {
+                return barfslow(
+                    '💥God just fucked a skunk.' +
+                    '\nTry refreshing the page.',
+                    'error',
+                    iipoff
+                );
+            }
+        };
+        xhr.send();
     }
 
     /**
@@ -143,4 +201,5 @@ document.addEventListener('DOMContentLoaded', function() {
     var form = document.querySelector('form');
     form.onsubmit = submit;
 
+    intro();
 });

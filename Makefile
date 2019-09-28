@@ -9,6 +9,7 @@
 
 VENV_DIR=/usr/local/virtualenv/.dingy
 VENV_CMD=virtualenv-3
+JSHINT=~/.npm-packages/bin/jshint
 
 dunno:
 	@echo "Give me somepin to make"
@@ -29,3 +30,8 @@ venv:
 		rm -rf $(VENV_DIR); fi'
 	${VENV_CMD} --clear --python=python3 $(VENV_DIR)
 .PHONY: venv
+
+
+jsh:
+	@${JSHINT} nfsw/static/io.js
+.PHONY: jsh

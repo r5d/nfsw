@@ -1,29 +1,29 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     /**
      * Handling for sending commands to server.
      */
     window.qip = false;  // query in prograss flag.
     function query(q) {
         if (window.qip) {
-            return window.setTimeout(query, 10, q)
+            return window.setTimeout(query, 10, q);
         }
-        window.qip = true
+        window.qip = true;
 
         var qipoff = function() {
-            window.qip = false
-        }
+            window.qip = false;
+        };
         var spit = function(response) {
-            var gdg = 'Oops! getting gobbledygook from server'
+            var gdg = 'Oops! getting gobbledygook from server';
 
-            var r
+            var r;
             try {
-                r = JSON.parse(response)
+                r = JSON.parse(response);
             } catch (e) {
-                return barfslow(gdg, 'error', qipoff)
+                return barfslow(gdg, 'error', qipoff);
             }
 
-            if (!(typeof r === 'object')) {
-                return barf(gdg)
+            if (typeof r !== 'object') {
+                return barf(gdg);
             }
 
             if (!('ans' in r)) {
@@ -31,29 +31,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     'No answer from server!',
                     'error',
                     qipoff
-                )
+                );
             }
 
-            return barfslow(r.ans, 'concierge', qipoff)
-        }
+            return barfslow(r.ans, 'concierge', qipoff);
+        };
 
-        var xhr = new XMLHttpRequest()
-        xhr.open('POST', '/io/query', true)
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/io/query', true);
 
         xhr.onreadystatechange = function() {
             if (this.readyState != 4) {
-                return
+                return;
             }
 
             if (this.status == 200) {
-                return spit(this.responseText)
+                return spit(this.responseText);
             } else {
                 return barfslow(
-                    'Unable send command to server!', 'error', qipoff
-                )
+                    '💥', 'error', qipoff
+                );
             }
-        }
-        xhr.send(q)
+        };
+        xhr.send(q);
     }
 
     /**
@@ -61,49 +61,49 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function barf(txt, type, p) {
         if (txt.length < 1) {
-            return ''
+            return '';
         }
-        barfblank()
+        barfblank();
 
-        p = document.createElement('p')
-        p.className = type
+        p = document.createElement('p');
+        p.className = type;
 
-        p.append(txt)
+        p.append(txt);
 
-        ioconsole.appendChild(p)
+        ioconsole.appendChild(p);
 
-        return ''
+        return '';
     }
     function barfblank() {
-        p = document.createElement('p')
-        p.className = 'blank'
+        p = document.createElement('p');
+        p.className = 'blank';
 
-        p.innerHTML = '<br />'
+        p.innerHTML = '<br />';
 
-        ioconsole.appendChild(p)
+        ioconsole.appendChild(p);
     }
     function barfslow(txt, type, cb, p) {
-        if (txt.length < 1) {
+        if (!txt || txt.length < 1) {
             if (cb)
-                cb()
+                cb();
 
-            return ''
+            return '';
         }
 
-        nl = false
+        nl = false;
         if (txt.charAt(0) == '\n')
-            nl = true
+            nl = true;
 
         if (!p)
-            barfblank()
+            barfblank();
         if (!p || nl) {
-            p = document.createElement('p')
-            p.className = type
+            p = document.createElement('p');
+            p.className = type;
 
-            ioconsole.appendChild(p)
+            ioconsole.appendChild(p);
         }
-        p.append(txt.substring(0, 1))
-        p.scrollIntoView()
+        p.append(txt.substring(0, 1));
+        p.scrollIntoView();
 
         window.setTimeout(
             barfslow, 0,
@@ -111,36 +111,36 @@ document.addEventListener('DOMContentLoaded', () => {
             type,
             cb,
             p
-        )
+        );
 
-        return ''
+        return '';
     }
-    var ioconsole = document.getElementsByClassName('console')[0]
+    var ioconsole = document.getElementsByClassName('console')[0];
 
 
     /**
      * Handling for the prompt.
      */
     function submit(e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        var input = e.target.querySelector('input')
+        var input = e.target.querySelector('input');
 
-        var cmd = input.value
+        var cmd = input.value;
         if (cmd.length < 1)
-            return
+            return;
 
         /**
          * Reset prompt.
          */
-        input.value = ''
+        input.value = '';
 
         /**
          * Send command to server.
          */
-        query(cmd)
+        query(cmd);
     }
-    var form = document.querySelector('form')
-    form.onsubmit = submit
+    var form = document.querySelector('form');
+    form.onsubmit = submit;
 
-})
+});

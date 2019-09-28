@@ -5,6 +5,7 @@ import nfsw.scenes as scenes
 from nfsw.auth import login_required, login_required_ajax
 from nfsw.redis import redis as r, key as k
 from nfsw.scenes import current_scene
+from nfsw.util import read_junk
 
 from flask import (
     Blueprint, render_template, request
@@ -56,3 +57,18 @@ def query():
     }
 
 
+@bp.route('/io/intro', methods=['POST'])
+@login_required_ajax
+@preprocess
+def intro():
+
+    # Get current scene
+    scene = current_scene()
+    if scene is None:
+        return {
+            'intro': read_junk('foobar/god')
+        }, 500
+
+    return {
+        'intro': scene({'intro': 1})
+    }

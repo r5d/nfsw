@@ -14,6 +14,10 @@ bp = Blueprint('io', __name__)
 
 
 def preprocess(view):
+    def setup():
+        if not r().exists(k('scene')):
+            r().set(k('scene'), 'sexshop')
+
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         setup()
@@ -51,7 +55,3 @@ def query():
     }
 
 
-def setup():
-    """Setup user's state"""
-    if not r().exists(k('scene')):
-        r().set(k('scene'), 'sexshop')

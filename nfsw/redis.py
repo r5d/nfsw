@@ -2,6 +2,12 @@ from redis import Redis
 
 from flask import current_app, g, session
 
+def keys():
+    """List of keys used by nfsw"""
+    return [
+        k('scene')
+    ]
+
 def redis():
     if 'redis' in g:
         return g.redis

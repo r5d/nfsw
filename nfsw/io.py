@@ -10,6 +10,7 @@ from flask import (
     Blueprint, render_template, request
 )
 
+
 bp = Blueprint('io', __name__)
 
 
@@ -51,7 +52,7 @@ def query():
 
     # Respond.
     return {
-        'ans': scene(q)
+        'ans': scene({'q': q})
     }
 
 

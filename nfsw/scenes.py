@@ -1,4 +1,6 @@
 from nfsw.redis import redis as r, key as k
+from nfsw.util import read_junk
+
 
 def get_scene(name):
     scenes = {
@@ -14,5 +16,17 @@ def current_scene():
     )
 
 
-def sexshop(q):
-    return q  + ' you are fucked'
+def sexshop(o):
+    def intro():
+        return read_junk('sexshop/intro')
+
+    def process(q):
+        return ''
+
+    if 'intro' in o:
+        return intro()
+
+    if 'q' in o:
+        return process(o['q'])
+
+

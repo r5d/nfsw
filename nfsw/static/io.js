@@ -7,23 +7,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.qip) {
             return window.setTimeout(query, 10, q)
         }
-        window.qip = true;
+        window.qip = true
 
         var qipoff = function() {
-            window.qip = false;
+            window.qip = false
         }
         var spit = function(response) {
-            var gdg = 'Oops! getting gobbledygook from server';
+            var gdg = 'Oops! getting gobbledygook from server'
 
-            var r;
+            var r
             try {
                 r = JSON.parse(response)
             } catch (e) {
-                return barfslow(gdg, 'error', qipoff);
+                return barfslow(gdg, 'error', qipoff)
             }
 
             if (!(typeof r === 'object')) {
-                return barf(gdg);
+                return barf(gdg)
             }
 
             if (!('ans' in r)) {
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         xhr.onreadystatechange = function() {
             if (this.readyState != 4) {
-                return;
+                return
             }
 
             if (this.status == 200) {
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ioconsole.appendChild(p)
         }
         p.append(txt.substring(0, 1))
-        p.scrollIntoView();
+        p.scrollIntoView()
 
         window.setTimeout(
             barfslow, 0,
@@ -143,4 +143,4 @@ document.addEventListener('DOMContentLoaded', () => {
     var form = document.querySelector('form')
     form.onsubmit = submit
 
-});
+})

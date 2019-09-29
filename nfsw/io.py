@@ -35,6 +35,23 @@ def io():
     return render_template('io.html')
 
 
+@bp.route('/io/reset')
+@login_required
+def reset():
+    r().delete(k('scene'))
+    r().delete(k('scene:sexshop:gg'))
+    r().delete(k('scenes:done'))
+
+    r().delete(k('player:type'))
+    r().delete(k('player:type:body'))
+    r().delete(k('player:type:mind'))
+    r().delete(k('player:type:mind'))
+
+    r().delete(k('log'))
+
+    return 'Game reset'
+
+
 @bp.route('/io/query', methods=['POST'])
 @login_required_ajax
 @preprocess

@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         barfblank();
 
-        p = document.createElement('p');
+        p = document.createElement('pre');
         p.className = type;
 
         p.append(txt);
@@ -133,10 +133,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return '';
     }
     function barfblank() {
-        p = document.createElement('p');
+        p = document.createElement('pre');
         p.className = 'blank';
 
-        p.innerHTML = '<br />';
+        p.innerHTML = '\n';
 
         ioconsole.appendChild(p);
     }
@@ -148,14 +148,10 @@ document.addEventListener('DOMContentLoaded', function() {
             return '';
         }
 
-        nl = false;
-        if (txt.charAt(0) == '\n')
-            nl = true;
-
         if (!p)
             barfblank();
-        if (!p || nl) {
-            p = document.createElement('p');
+        if (!p) {
+            p = document.createElement('pre');
             p.className = type;
 
             ioconsole.appendChild(p);

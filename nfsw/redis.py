@@ -5,7 +5,18 @@ from flask import current_app, g, session
 def keys():
     """List of keys used by nfsw"""
     return [
-        k('scene')
+        k('log'),
+
+        k('scene'),
+        k('scene:sexshop:gg'),
+        k('scenes:done'),
+
+
+        k('player:type'),
+        k('player:type:body'),
+        k('player:type:mind'),
+
+
     ]
 
 def redis():

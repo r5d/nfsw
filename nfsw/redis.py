@@ -94,3 +94,7 @@ class RedisC:
         return self.r.sadd(k, v)
 
 
+    def sismember(self, k, v):
+        k = self.key(k)
+
+        return self.r.sismember(k, v)

@@ -61,10 +61,11 @@ def reset():
 @login_required_ajax
 @preprocess
 def query():
+    r = redisc()
     q = request.get_data(as_text=True)
 
     # Log query.
-    r().rpush(k('log'), q)
+    r.rpush('log', q)
 
     # Get current scene.
     scene = current_scene()

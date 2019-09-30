@@ -1,4 +1,4 @@
-from nfsw.redis import redis as r, redisc, key as k
+from nfsw.redis import redisc
 from nfsw.util import read_junk
 
 

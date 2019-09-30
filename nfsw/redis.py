@@ -33,3 +33,35 @@ def key(prefix):
         return '{}:{}'.format(prefix, session['user_id'])
     else:
         return prefix
+
+
+class RedisC:
+    r = None
+
+    def __init__(self):
+        self.r = Redis()
+
+
+    def key(self, k):
+        if 'user_id' in session:
+            return '{}:{}'.format(k, session['user_id'])
+        else:
+            return k
+
+
+    def exists(self, k):
+        k = self.key(k)
+
+        return self.r.exists(k)
+
+
+    def set(self, k, v):
+        k = self.key(k)
+
+        return self.r.set(k, v)
+
+
+    def delete(self, k):
+        k = self.key(k)
+
+        return self.r.delete(k)

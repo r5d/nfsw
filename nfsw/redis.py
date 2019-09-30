@@ -70,6 +70,12 @@ class RedisC:
         return self.r.set(k, v)
 
 
+    def get(self, k):
+        k = self.key(k)
+
+        return self.r.get(k)
+
+
     def delete(self, k):
         k = self.key(k)
 

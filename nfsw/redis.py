@@ -86,3 +86,11 @@ class RedisC:
         k = self.key(k)
 
         return self.r.rpush(k, v)
+
+
+    def sadd(self, k, v):
+        k = self.key(k)
+
+        return self.r.sadd(k, v)
+
+

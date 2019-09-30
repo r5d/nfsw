@@ -3,7 +3,7 @@ import functools
 import nfsw.scenes as scenes
 
 from nfsw.auth import login_required, login_required_ajax
-from nfsw.redis import redis as r, redisc, key as k
+from nfsw.redis import redisc
 from nfsw.scenes import current_scene
 from nfsw.util import read_junk
 

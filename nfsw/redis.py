@@ -19,15 +19,6 @@ def keys():
 
     ]
 
-def redis():
-    if 'redis' in g:
-        return g.redis
-
-    g.redis = Redis()
-
-    return g.redis
-
-
 def key(prefix):
     if 'user_id' in session:
         return '{}:{}'.format(prefix, session['user_id'])

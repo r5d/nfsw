@@ -3,7 +3,7 @@ import functools
 import nfsw.scenes as scenes
 
 from nfsw.auth import login_required, login_required_ajax
-from nfsw.redis import redis as r, key as k
+from nfsw.redis import redis as r, redisc, key as k
 from nfsw.scenes import current_scene
 from nfsw.util import read_junk
 
@@ -17,8 +17,11 @@ bp = Blueprint('io', __name__)
 
 def preprocess(view):
     def setup():
-        if not r().exists(k('scene')):
-            r().set(k('scene'), 'sexshop')
+        r = redisc()
+
+        if not r.exists('scene'):
+            r.set('scene', 'sexshop')
+
 
     @functools.wraps(view)
     def wrapped_view(**kwargs):

@@ -20,6 +20,8 @@ def current_scene():
 
 
 def sexshop(o):
+    r = redisc()
+
     gobbledygook = [
         'I just got raped in the'
         '\narse by 9238 sentinels.'
@@ -36,10 +38,10 @@ def sexshop(o):
         l = len(gobbledygook)
 
         for i in range(0, l):
-            if r().sismember(k('scene:sexshop:gg'), i):
+            if r.sismember('scene:sexshop:gg', i):
                 continue
 
-            r().sadd(k('scene:sexshop:gg'), i)
+            r.sadd('scene:sexshop:gg', i)
             return gobbledygook[i]
 
         return 'I\'m outta words.'
@@ -50,26 +52,26 @@ def sexshop(o):
 
 
     def p_done(q):
-        if r().sismember(k('scenes:done'), 'sexshop'):
+        if r.sismember('scenes:done', 'sexshop'):
             return rj('done')
 
         # Set player type.
-        type = '{}{}'.format(r().get(k('player:type:body')).decode(),
-                             r().get(k('player:type:mind')).decode())
-        r().set(k('player:type'), type)
+        type = '{}{}'.format(r.get('player:type:body').decode(),
+                             r.get('player:type:mind').decode())
+        r.set('player:type', type)
 
         # Mark scene done
-        r().sadd(k('scenes:done'), 'sexshop')
+        r.sadd('scenes:done', 'sexshop')
 
         # Move to next scene
-        r().set(k('scene'), 'garden')
+        r.set('scene', 'garden')
 
         return garden({'intro': 1})
 
 
     def p_body(q):
         if 'female' in q:
-            r().set(k('player:type:body'), 'f')
+            r.set('player:type:body', 'f')
 
             return '\n\n'.join([
                 rj('body-f-done'),
@@ -77,7 +79,7 @@ def sexshop(o):
             ])
 
         if 'male' in q:
-            r().set(k('player:type:body'), 'm')
+            r.set('player:type:body', 'm')
 
             return '\n\n'.join([
                 rj('body-m-done'),
@@ -89,7 +91,7 @@ def sexshop(o):
 
     def p_mind(q):
         if 'women' in q:
-            r().set(k('player:type:mind'), 'w')
+            r.set('player:type:mind', 'w')
 
             return '\n\n'.join([
                 rj('mind-f-done'),
@@ -97,7 +99,7 @@ def sexshop(o):
             ])
 
         if 'men' in q:
-            r().set(k('player:type:mind'), 'm')
+            r.set('player:type:mind', 'm')
 
             return '\n\n'.join([
                 rj('mind-m-done'),
@@ -108,13 +110,13 @@ def sexshop(o):
 
 
     def p(q):
-        if r().exists(k('player:type')):
+        if r.exists('player:type'):
             return p_done(q)
 
-        if not r().exists(k('player:type:body')):
+        if not r.exists('player:type:body'):
             return p_body(q)
 
-        if not r().exists(k('player:type:mind')):
+        if not r.exists('player:type:mind'):
             return p_mind(q)
 
         return p_done(q)

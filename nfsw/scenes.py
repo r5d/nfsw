@@ -1,4 +1,4 @@
-from nfsw.redis import redis as r, key as k
+from nfsw.redis import redis as r, redisc, key as k
 from nfsw.util import read_junk
 
 
@@ -12,8 +12,10 @@ def get_scene(name):
 
 
 def current_scene():
+    r = redisc()
+
     return get_scene(
-        r().get(k('scene')).decode()
+        r.get('scene').decode()
     )
 
 

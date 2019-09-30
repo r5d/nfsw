@@ -35,6 +35,15 @@ def key(prefix):
         return prefix
 
 
+def redisc():
+    if 'redisc' in g:
+        return g.redisc
+
+    g.redisc = RedisC()
+
+    return g.redisc
+
+
 class RedisC:
     r = None
 

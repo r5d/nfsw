@@ -74,3 +74,9 @@ class RedisC:
         k = self.key(k)
 
         return self.r.delete(k)
+
+
+    def rpush(self, k, v):
+        k = self.key(k)
+
+        return self.r.rpush(k, v)

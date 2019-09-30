@@ -2,23 +2,6 @@ from redis import Redis
 
 from flask import current_app, g, session
 
-def keys():
-    """List of keys used by nfsw"""
-    return [
-        k('log'),
-
-        k('scene'),
-        k('scene:sexshop:gg'),
-        k('scenes:done'),
-
-
-        k('player:type'),
-        k('player:type:body'),
-        k('player:type:mind'),
-
-
-    ]
-
 
 def redisc():
     if 'redisc' in g:
@@ -34,6 +17,22 @@ class RedisC:
 
     def __init__(self):
         self.r = Redis()
+
+
+    def keys(self):
+        return [
+            self.key('log'),
+
+            self.key('scene'),
+            self.key('scene:sexshop:gg'),
+            self.key('scenes:done'),
+
+
+            self.key('player:type'),
+            self.key('player:type:body'),
+            self.key('player:type:mind'),
+        ]
+
 
 
     def key(self, k):

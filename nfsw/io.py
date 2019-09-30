@@ -41,16 +41,18 @@ def io():
 @bp.route('/io/reset')
 @login_required
 def reset():
-    r().delete(k('scene'))
-    r().delete(k('scene:sexshop:gg'))
-    r().delete(k('scenes:done'))
+    r = redisc()
 
-    r().delete(k('player:type'))
-    r().delete(k('player:type:body'))
-    r().delete(k('player:type:mind'))
-    r().delete(k('player:type:mind'))
+    r.delete('scene')
+    r.delete('scene:sexshop:gg')
+    r.delete('scenes:done')
 
-    r().delete(k('log'))
+    r.delete('player:type')
+    r.delete('player:type:body')
+    r.delete('player:type:mind')
+    r.delete('player:type:mind')
+
+    r.delete('log')
 
     return 'Game reset'
 

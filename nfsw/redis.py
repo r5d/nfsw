@@ -19,12 +19,6 @@ def keys():
 
     ]
 
-def key(prefix):
-    if 'user_id' in session:
-        return '{}:{}'.format(prefix, session['user_id'])
-    else:
-        return prefix
-
 
 def redisc():
     if 'redisc' in g:

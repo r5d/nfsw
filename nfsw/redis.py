@@ -3,7 +3,7 @@ from redis import Redis
 from flask import current_app, g, session
 
 
-def redisc():
+def redis():
     if 'redisc' in g:
         return g.redisc
 

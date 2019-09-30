@@ -3,7 +3,7 @@ import functools
 import nfsw.scenes as scenes
 
 from nfsw.auth import login_required, login_required_ajax
-from nfsw.redis import redisc
+from nfsw.redis import redis
 from nfsw.scenes import current_scene
 from nfsw.util import read_junk
 
@@ -17,7 +17,7 @@ bp = Blueprint('io', __name__)
 
 def preprocess(view):
     def setup():
-        r = redisc()
+        r = redis()
 
         if not r.exists('scene'):
             r.set('scene', 'sexshop')
@@ -41,7 +41,7 @@ def io():
 @bp.route('/io/reset')
 @login_required
 def reset():
-    r = redisc()
+    r = redis()
 
     r.delete('scene')
     r.delete('scene:sexshop:gg')
@@ -61,7 +61,7 @@ def reset():
 @login_required_ajax
 @preprocess
 def query():
-    r = redisc()
+    r = redis()
     q = request.get_data(as_text=True)
 
     # Log query.

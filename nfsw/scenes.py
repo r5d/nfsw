@@ -1,4 +1,4 @@
-from nfsw.redis import redisc
+from nfsw.redis import redis
 from nfsw.util import read_junk
 
 
@@ -12,7 +12,7 @@ def get_scene(name):
 
 
 def current_scene():
-    r = redisc()
+    r = redis()
 
     return get_scene(
         r.get('scene').decode()
@@ -20,7 +20,7 @@ def current_scene():
 
 
 def sexshop(o):
-    r = redisc()
+    r = redis()
 
     gobbledygook = [
         'I just got raped in the'

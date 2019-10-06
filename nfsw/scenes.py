@@ -5,7 +5,8 @@ from nfsw.util import read_junk
 def get_scene(name):
     scenes = {
         'sexshop': sexshop,
-        'garden': garden
+        'garden': garden,
+        'nymphomaniac': nymphomaniac
     }
 
     return scenes.get(name, None)
@@ -130,4 +131,95 @@ def sexshop(o):
 
 
 def garden(o):
-    return 'The Garden'
+    r = redis()
+
+    gobbledygook = [
+        'You\'re such a hot mess.'
+        '\nCome on, talk some sense.',
+        'The tulips in the garden'
+        '\nget fucked by bees everyday'
+        '\nYou can too.',
+        'There is nothing much you can'
+        '\ndo in the garden.'
+        '\nYou do see the building right?'
+        '\nThe building\'s door looks open'
+        '\nto me',
+        'I get bit by mosquitos all the time'
+        '\nin this garden at night.'
+        '\nYou\'re the last thing I want here'
+        '\nCan you please figure a way'
+        '\nto get the fuck outta here?'
+    ]
+
+
+    def rj(name):
+        return read_junk('garden/{}'.format(name))
+
+
+    def gg():
+        l = len(gobbledygook)
+
+        for i in range(0, l):
+            if r.sismember('scene:sexshop:gg', i):
+                continue
+
+            r.sadd('scene:sexshop:gg', i)
+            return gobbledygook[i]
+
+        return '\n'.join(['Your concierge is busy sucking',
+                          'his dog\'s gonads.',
+                          'It\'s gonna take forever.',
+                          'He is unable to answer at this moment'])
+
+
+    def intro():
+        return rj('intro')
+
+
+    def verb_in(q):
+        if 'go' in q:
+            return True
+
+        if 'enter' in q:
+            return True
+
+        return False
+
+
+    def object_in(q):
+        if 'building' in q:
+            return True
+
+        return False
+
+
+    def p_done(q):
+        # Mark scene done
+        r.sadd('scenes:done', 'garden')
+
+        # Move to next scene
+        r.set('scene', 'nymphomaniac')
+
+        return  '\n\n'.join([
+            rj('to-the-building'),
+            nymphomaniac({'intro': 1})
+        ])
+
+
+    def p(q):
+
+        if verb_in(q) and object_in(q):
+            return p_done(q)
+
+        return gg()
+
+
+    if 'intro' in o:
+        return rj('intro')
+
+    if 'q' in o:
+        return p(o['q'])
+
+
+def nymphomaniac(o):
+    return 'NYMPH'

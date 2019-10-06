@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
         p.scrollIntoView();
 
         window.setTimeout(
-            barfslow, 0,
+            barfslow, 25,
             txt.substring(1, txt.length),
             type,
             cb,

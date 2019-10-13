@@ -262,7 +262,7 @@ def nymphomaniac(o):
             return gobbledygook_hunk[i]
 
         return '\n'.join([
-        'An invisible hand forces your mouth open',
+        'An invisible hand forces your mouth open.',
         'A squishy chunk of the skinned cat\'s',
         'fried meat forces it\'s way through your',
         'mouth, to your esophagus and into your stomach.'

@@ -282,10 +282,6 @@ def nymphomaniac(o):
         return '\n'.join(['For fuck sake answer the question.'])
 
 
-    def intro():
-        return rj('intro')
-
-
     def hunk_in(q):
         if 'hunk' in q:
             return True

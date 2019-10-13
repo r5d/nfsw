@@ -6,7 +6,9 @@ def get_scene(name):
     scenes = {
         'sexshop': sexshop,
         'garden': garden,
-        'nymphomaniac': nymphomaniac
+        'nymphomaniac': nymphomaniac,
+        'coitus': coitus,
+        'strayed': strayed
     }
 
     return scenes.get(name, None)

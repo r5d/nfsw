@@ -390,7 +390,7 @@ def coitus(o):
         r.set('scene', 'strayed')
 
         return '\n\n'.join([
-            rj('fuck-{}'.format(type[1])),
+            rj('fuck-{}'.format(type)),
             strayed({'intro': 1})
         ])
 

@@ -335,5 +335,86 @@ def nymphomaniac(o):
 
 
 def coitus(o):
-    return 'Code Coitus'
+    r =  redis()
 
+    type = r.get('player:type').decode()
+    gobbledygook = [
+        'Really?'
+        '\nWhen cat Tom sees rat Jerry'
+        '\nTom chases Jerry'
+        '\nThat\'s basic instinct'
+        '\nDon\'t you have one?',
+        'Come on'
+        '\nA chipmunk would know'
+        '\nwhat to do when it sees'
+        '\nan attractive partner'
+        '\nchipping away at an acorn'
+    ]
+
+
+    def rj(name):
+        return read_junk('coitus/{}'.format(name))
+
+
+    def gg():
+        l = len(gobbledygook)
+
+        for i in range(0, l):
+            if r.sismember('scene:coitus:gg', i):
+                continue
+
+            r.sadd('scene:coitus:gg', i)
+            return gobbledygook[i]
+
+        return '\n'.join([
+            'Your concierge is busy',
+            'masturbating. He his unable',
+            'to respond to you at the moment'
+        ])
+
+
+    def intro():
+        return rj('intro-{}'.format(type))
+
+
+    def colloquial():
+        return '\n'.join([
+            'Use the colloquial term',
+            'Pretty please'
+        ])
+
+
+    def p_done(q):
+        # Mark scene done
+        r.sadd('scenes:done', 'coitus')
+
+        # Move to next scene
+        r.set('scene', 'strayed')
+
+        return '\n\n'.join([
+            rj('fuck-{}'.format(type[1])),
+            strayed({'intro': 1})
+        ])
+
+
+    def p(q):
+
+        if 'fuck' in q:
+            return p_done(q)
+
+        if 'sex' in q or 'coitus' in q:
+            return colloquial()
+
+        return gg()
+
+
+    if 'intro' in o:
+        return intro()
+
+
+    if 'q' in o:
+        return p(o['q'])
+
+
+def strayed(o):
+    return 'Code Strayed'

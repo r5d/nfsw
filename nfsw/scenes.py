@@ -308,7 +308,7 @@ def nymphomaniac(o):
         r.sadd('scenes:done', 'nymphomaniac')
 
         # Move to next scene
-        r.set('scene', 'nymphomaniac')
+        r.set('scene', 'coitus')
 
         return '\n\n'.join([
             rj('door-opens'),

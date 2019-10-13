@@ -160,10 +160,10 @@ def garden(o):
         l = len(gobbledygook)
 
         for i in range(0, l):
-            if r.sismember('scene:sexshop:gg', i):
+            if r.sismember('scene:garden:gg', i):
                 continue
 
-            r.sadd('scene:sexshop:gg', i)
+            r.sadd('scene:garden:gg', i)
             return gobbledygook[i]
 
         return '\n'.join(['Your concierge is busy sucking',

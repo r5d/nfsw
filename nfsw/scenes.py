@@ -222,4 +222,118 @@ def garden(o):
 
 
 def nymphomaniac(o):
-    return 'NYMPH'
+    r =  redis()
+
+    gobbledygook = [
+        'I don\'t have time for your gobbledygook'
+        '\nCan we just focus on your fucking task'
+        '\nplease.',
+        'Blood starts trickling from the corners'
+        '\nof the big screen',
+        'You feel your gonads spurt and blot'
+        '\nyour underwear. You sample it with your'
+        '\nindex finger, smell it and lick it.'
+        '\nIt\'s blood.'
+    ]
+    gobbledygook_hunk = [
+        'Can\'t do nothin\' with hunk.'
+        '\nBetter luck next time',
+        'Next time you try to do anything with the hunk'
+        '\nI\'m going to force you to eat his dingle berries',
+        'Stop your infatuation with the hunk.'
+        '\nForget his dingle berries.'
+        '\nEven better.'
+        '\nI might be forced to feed you the skinned'
+        '\ncat for lunch today, if you persist.'
+    ]
+
+    def rj(name):
+        return read_junk('nymphomaniac/{}'.format(name))
+
+
+    def gg_hunk():
+        l = len(gobbledygook_hunk)
+
+        for i in range(0, l):
+            if r.sismember('scene:nymphomaniac:gg-hunk', i):
+                continue
+
+            r.sadd('scene:nymphomaniac:gg-hunk', i)
+            return gobbledygook_hunk[i]
+
+        return '\n'.join([
+        'An invisible hand forces your mouth open',
+        'A squishy chunk of the skinned cat\'s',
+        'fried meat forces it\'s way through your',
+        'mouth, to your esophagus and into your stomach.'
+        ])
+
+
+    def gg():
+        l = len(gobbledygook)
+
+        for i in range(0, l):
+            if r.sismember('scene:nymphomaniac:gg', i):
+                continue
+
+            r.sadd('scene:nymphomaniac:gg', i)
+            return gobbledygook[i]
+
+        return '\n'.join(['For fuck sake answer the question.'])
+
+
+    def intro():
+        return rj('intro')
+
+
+    def hunk_in(q):
+        if 'hunk' in q:
+            return True
+
+        if 'water' in q and 'fountain' in q:
+            return True
+
+        return False
+
+
+    def ans_in(q):
+        if 'vaginal' in q and 'fluid' in q:
+            return True
+
+        return False
+
+
+    def p_done(q):
+        # Mark scene done
+        r.sadd('scenes:done', 'nymphomaniac')
+
+        # Move to next scene
+        r.set('scene', 'nymphomaniac')
+
+        return '\n\n'.join([
+            rj('door-opens'),
+            coitus({'intro': 1})
+        ])
+
+
+    def p(q):
+        if hunk_in(q):
+            return gg_hunk()
+
+        if ans_in(q):
+            return p_done(q)
+
+        return gg()
+
+
+    if 'intro' in o:
+        return rj('intro')
+
+
+    if 'q' in o:
+        return p(o['q'])
+
+
+def coitus(o):
+    return 'Code Coitus'
+

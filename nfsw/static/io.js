@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var qipoff = function() {
             window.qip = false;
+            ioconsole.autoScroll = true;
         };
         var spit = function(response) {
             var gdg = 'Oops! getting gobbledygook from server';
@@ -65,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var iipoff = function() {
             window.iip = false;
+            ioconsole.autoScroll = true;
         };
         var spit = function(response, status) {
             var r;
@@ -157,7 +159,11 @@ document.addEventListener('DOMContentLoaded', function() {
             ioconsole.appendChild(p);
         }
         p.append(txt.substring(0, 1));
-        p.scrollIntoView();
+
+        if (ioconsole.autoScroll) {
+            p.scrollIntoView(false);
+        }
+
 
         window.setTimeout(
             barfslow, 25,
@@ -170,6 +176,19 @@ document.addEventListener('DOMContentLoaded', function() {
         return '';
     }
     var ioconsole = document.getElementsByClassName('console')[0];
+    ioconsole.onscroll = function(e) {
+        if (!window.qip && !window.iip) {
+            return;
+        }
+
+        if (e.target.scrollTop < e.target.lastScrollTop) {
+            e.target.autoScroll = false;
+        }
+
+        e.target.lastScrollTop = e.target.scrollTop;
+    };
+    ioconsole.lastScrollTop = ioconsole.scrollTop;
+    ioconsole.autoScroll = true;
 
 
     /**

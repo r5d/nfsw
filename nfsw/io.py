@@ -61,6 +61,9 @@ def reset():
 @login_required_ajax
 @preprocess
 def query():
+    def sanitize(q):
+        return q.strip().lower()
+
     r = redis()
     q = request.get_data(as_text=True)
 
@@ -76,7 +79,7 @@ def query():
 
     # Respond.
     return {
-        'ans': scene({'q': q})
+        'ans': scene({'q': sanitize(q)})
     }
 
 

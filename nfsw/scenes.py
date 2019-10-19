@@ -415,4 +415,72 @@ def coitus(o):
 
 
 def strayed(o):
-    return 'Code Strayed'
+    r = redis()
+
+    gobbledygook = [
+        'You know one of Sugar\'s books was'
+        '\nselected for Oprah\'s Book Club 2.0.',
+        'Also the book was adapted into a'
+        '\nbiographical drama film.',
+        'Ok, this is the last one.'
+        '\nChuck Palahniuk mentions about Sugar'
+        '\nin Joe Rogan\'s podcast.'
+    ]
+
+    def rj(name):
+        return read_junk('strayed/{}'.format(name))
+
+
+    def gg():
+        l = len(gobbledygook)
+
+        for i in range(0, l):
+            if r.sismember('scene:strayed:gg', i):
+                continue
+
+            r.sadd('scene:strayed:gg', i)
+            return gobbledygook[i]
+
+        return rj('passed-out')
+
+
+    def p_done():
+        # Mark scene done
+        r.sadd('scenes:done', 'strayed')
+
+        # Move to next scene
+        r.set('scene', 'xkcd')
+
+        return '\n\n'.join([
+            rj('into-white'),
+            xkcd({'intro': 1})
+        ])
+
+
+    def p(q):
+        if 'fuck' in q:
+            return rj('fuck')
+
+        if 'masturbate' in q:
+            return rj('masturbate')
+
+        if 'cheryl strayed' in q:
+            return p_done()
+
+        return gg()
+
+
+    if 'intro' in o:
+        return rj('intro')
+
+
+    if 'q' in o:
+        return p(o['q'])
+
+
+def xkcd(o):
+    return 'XKCD Sky'
+
+
+def bedroom(o):
+    return 'You are in your bedroom'

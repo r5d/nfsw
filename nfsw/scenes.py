@@ -481,7 +481,63 @@ def strayed(o):
 
 
 def xkcd(o):
-    return 'XKCD Sky'
+    r = redis()
+
+    gobbledygook = [
+        'A flock of warblers cruise through'
+        '\nthe wondrous blue white atmosphere'
+        '\nand dwindle out of view to their'
+        '\nwinter recluse',
+        'You know.'
+        '\nRandall Munroe likes oglaf!',
+        'It\'s dusk now.'
+        '\nThe space around you is'
+        '\norange with tinges of blue.'
+    ]
+
+    def rj(name):
+        return read_junk('xkcd/{}'.format(name))
+
+
+    def gg():
+        l = len(gobbledygook)
+
+        for i in range(0, l):
+            if r.sismember('scene:xkcd:gg', i):
+                continue
+
+            r.sadd('scene:xkcd:gg', i)
+            return gobbledygook[i]
+
+        return 'The space\'s outta words.'
+
+
+    def p_done():
+        # Mark scene done
+        r.sadd('scenes:done', 'xkcd')
+
+        # Move to next scene
+        r.set('scene', 'bedroom')
+
+        return '\n\n'.join([
+            rj('pass-out'),
+            bedroom({'intro': 1})
+        ])
+
+
+    def p(q):
+
+        if 'people are complicated' in q:
+            return p_done()
+
+        return gg()
+
+
+    if 'intro' in o:
+        return rj('intro')
+
+    if 'q' in o:
+        return p(o['q'])
 
 
 def bedroom(o):

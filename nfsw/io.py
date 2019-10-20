@@ -61,6 +61,8 @@ def reset():
 @login_required_ajax
 @preprocess
 def query():
+    r = redis()
+
     def sanitize(q):
         return q.strip().lower()
 
@@ -74,6 +76,14 @@ def query():
     if q == 'help':
         return {
             'ans': read_junk('help/senditdown')
+        }
+
+    # reset.
+    if q == 'nfsw reset':
+        reset()
+        return {
+            'ans': 'Initiating game reset...',
+            'reset': True
         }
 
     # Get current scene.

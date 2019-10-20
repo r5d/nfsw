@@ -3,14 +3,20 @@
 {% block title %}/{% endblock %}
 
 {% block content %}
-<div class="nfsw-block">
-    <header>
-        <h1>NFSW is Full of Slimy Warts!</h1>
-    </header>
+<div class="nfsw-grid">
+    <div class="nfsw-grid-item">
+        <header>
+            <h1>NFSW is Full of Slimy Warts!</h1>
+        </header>
 
-    <div class="buttons">
-        <a class="button" href="/register">Register</a>
-        <a class="button" href="/login">Login</a>
-    </div>
+        <div class="buttons">
+            <a class="button" href="/register">Register</a>
+            <a class="button" href="/login">Login</a>
+        </div>
+    </divd>
 </div>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='root.css') }}">
 {% endblock %}

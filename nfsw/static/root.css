@@ -1,0 +1,65 @@
+@font-face {
+    font-family: roboto-black;
+    src: url('./fonts/roboto-black.ttf');
+}
+
+@font-face {
+    font-family: roboto-medium;
+    src: url('./fonts/roboto-medium.ttf');
+}
+
+header h1 {
+    font-family: roboto-black;
+    text-align: center;
+    font-size: 50px;
+}
+
+.nfsw-grid {
+    display: grid;
+    grid-template-rows: 29vh 225px 29vh;
+    grid-template-columns: auto 640px auto;
+}
+
+.nfsw-grid-item {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+}
+
+.button {
+    font-family: roboto-medium;
+    font-size: 25px;
+    flex-basis: auto;
+    border: 1px solid rgb(10, 10,10);
+    background-color: rgb(10,10,10);
+    color: rgb(240,240,240);
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 20px;
+    width: 120px;
+}
+
+@media (min-width: 100px) and (max-width: 420px) {
+    header h1 {
+        font-size: 45px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        height: 170px;
+    }
+
+    .button {
+        width: 85%;
+    }
+}

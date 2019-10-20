@@ -556,7 +556,7 @@ def bedroom(o):
     def cow():
         return os.path.join(
             current_app.root_path,
-            'templates/sodomized.cow'
+            'cow/sodomized.cow'
         )
 
 

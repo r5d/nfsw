@@ -590,4 +590,12 @@ def bedroom(o):
 
 
 def thanks(o):
+    r = redis()
+
+    if r.sismember('scenes:done', 'thanks'):
+        return ''
+
+    # Mark scene done
+    r.sadd('scenes:done', 'thanks')
+
     return read_junk('thanks/solong')

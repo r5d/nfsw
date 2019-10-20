@@ -35,6 +35,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 );
             }
 
+            if ('reset' in r && r.reset) {
+                return window.location.reload();
+            }
+
             return barfslow(r.ans, 'concierge', qipoff);
         };
 

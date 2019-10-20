@@ -10,7 +10,8 @@ def get_scene(name):
         'coitus': coitus,
         'strayed': strayed,
         'xkcd': xkcd,
-        'bedroom': bedroom
+        'bedroom': bedroom,
+        'thanks': thanks
     }
 
     return scenes.get(name, None)
@@ -541,4 +542,23 @@ def xkcd(o):
 
 
 def bedroom(o):
-    return 'You are in your bedroom'
+    r = redis()
+
+    def rj(name):
+        return read_junk('bedroom/{}'.format(name))
+
+    # Mark scene done
+    r.sadd('scenes:done', 'bedroom')
+
+    # Move to next scene
+    r.set('scene', 'thanks')
+
+    return '\n\n'.join([
+        rj('merry-christmas'),
+        rj('sodomized'),
+        thanks({})
+    ])
+
+
+def thanks(o):
+    return read_junk('thanks/solong')

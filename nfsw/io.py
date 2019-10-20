@@ -70,6 +70,12 @@ def query():
     # Log query.
     r.rpush('log', q)
 
+    # help.
+    if q == 'help':
+        return {
+            'ans': read_junk('help/senditdown')
+        }
+
     # Get current scene.
     scene = current_scene()
     if scene is None:

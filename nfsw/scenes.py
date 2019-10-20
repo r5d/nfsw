@@ -1,3 +1,8 @@
+import os.path
+import subprocess
+
+from flask import current_app, g
+
 from nfsw.redis import redis
 from nfsw.util import read_junk
 
@@ -547,6 +552,30 @@ def bedroom(o):
     def rj(name):
         return read_junk('bedroom/{}'.format(name))
 
+
+    def cow():
+        return os.path.join(
+            current_app.root_path,
+            'templates/sodomized.cow'
+        )
+
+
+    def wish():
+        u = g.user['username']
+        return 'merry fucking christmas {}.'.format(u)
+
+
+    def sodomize():
+        r = subprocess.run(
+            'cowsay -s -f {} "{}"'.format(cow(), wish()),
+            stdout=subprocess.PIPE,
+            shell=True,
+            universal_newlines=True
+        )
+
+        return r.stdout
+
+
     # Mark scene done
     r.sadd('scenes:done', 'bedroom')
 
@@ -555,7 +584,7 @@ def bedroom(o):
 
     return '\n\n'.join([
         rj('merry-christmas'),
-        rj('sodomized'),
+        sodomize(),
         thanks({})
     ])
 

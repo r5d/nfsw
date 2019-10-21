@@ -498,7 +498,7 @@ def xkcd(o):
         '\nRandall Munroe likes oglaf!',
         'It\'s dusk now.'
         '\nThe space around you is'
-        '\norange with tinges of blue.'
+        '\nin a welter of crimson.'
     ]
 
     def rj(name):

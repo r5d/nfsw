@@ -4,9 +4,12 @@
 
 {% block content %}
 
-<div class="terms-block">
+<article class="terms-block">
+    <header>
+        <h1>NFSW</h1>
+    </header>
 
-    <div class="terms">
+    <section class="terms">
         <header>
             <h1>Terms &amp; Conditions</h1>
         </header>
@@ -20,9 +23,13 @@
             consequential damages arising out of playing NFSW,
             even if the holder has been advised or is aware of the
             possibility of such damages.</p>
-    </div>
 
-    <div class="privacy">
+        <div class="lastupdated">
+            <p>Last Updated on the 21st October 2019</p>
+        </div>
+    </section>
+
+    <section class="privacy">
         <header>
             <h1>Privacy Policy</h1>
         </header>
@@ -42,7 +49,11 @@
 
         <p>Lastly, remember that you're on the Internet where Privacy
            is not a first class citizen. Tread with caution.</p>
-    </div>
+
+        <div class="lastupdated">
+            <p>Last Updated on the 21st October 2019</p>
+        </div>
+    </section>
 
     <form class="agree" method="post">
         <div class="form-group agree">
@@ -58,6 +69,6 @@
             <input type="submit" value="Submit">
         </div>
     </form>
-</div>
+</article>
 
 {% endblock %}

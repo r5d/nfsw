@@ -4,27 +4,42 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<div class="msg-block">
-    <div class="content">
-        {% for m in get_flashed_messages() %}
-        <p>{{ m }}</p>
-        {% endfor %}
+
+<div  class="auth-grid">
+    <div class="auth-grid-item">
+        <header>
+            <h1>NFSW - Register</h1>
+        </header>
+
+        <div class="msg-block">
+            <div class="content">
+                {% for m in get_flashed_messages() %}
+                <p>{{ m }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <form method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username"
+                       name="username" class="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password"
+                       name="password" class="password" required>
+            </div>
+
+            <div class="button-group">
+                <input type="submit" value="Register">
+            </div>
+        </form>
     </div>
 </div>
+{% endblock %}
 
-<form method="post">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input name="username" class="username" required>
-    </div>
-
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" name="password" class="password" required>
-    </div>
-
-    <div class="button-group">
-        <input type="submit" value="Register">
-    </div>
-</form>
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
 {% endblock %}

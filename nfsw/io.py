@@ -48,6 +48,7 @@ def reset():
     r.delete('scene:nymphomaniac:gg')
     r.delete('scene:nymphomaniac:gg-hunk')
     r.delete('scene:coitus:gg')
+    r.delete('scene:coitus:fucked')
     r.delete('scene:strayed:gg')
     r.delete('scene:xkcd:gg')
     r.delete('scenes:done')

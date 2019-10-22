@@ -390,6 +390,29 @@ def coitus(o):
         ])
 
 
+    def fucked():
+        if r.get('scene:coitus:fucked'):
+            return True
+
+        return False
+
+
+    def fuck(q):
+        r.set('scene:coitus:fucked', 1)
+
+        return rj('fuck-{}'.format(type))
+
+
+    def mirror(q):
+        if not r.get('scene:coitus:fucked'):
+            return False
+
+        if 'touch' in q and 'mirror' in q:
+            return True
+
+        return False
+
+
     def p_done(q):
         # Mark scene done
         r.sadd('scenes:done', 'coitus')
@@ -398,17 +421,19 @@ def coitus(o):
         r.set('scene', 'strayed')
 
         return '\n\n'.join([
-            rj('fuck-{}'.format(type)),
+            rj('mirror'),
             strayed({'intro': 1})
         ])
 
 
     def p(q):
-
-        if 'fuck' in q:
+        if mirror(q):
             return p_done(q)
 
-        if 'sex' in q or 'coitus' in q:
+        if not fucked() and 'fuck' in q:
+            return fuck(q)
+
+        if not fucked() and ('sex' in q or 'coitus' in q):
             return colloquial()
 
         return gg()

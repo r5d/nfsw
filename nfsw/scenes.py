@@ -623,4 +623,5 @@ def thanks(o):
     # Mark scene done
     r.sadd('scenes:done', 'thanks')
 
-    return read_junk('thanks/solong')
+    type = r.get('player:type:mind').decode()
+    return read_junk('thanks/solong-{}'.format(type))

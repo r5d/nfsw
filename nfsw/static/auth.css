@@ -13,6 +13,19 @@
     src: url('./fonts/roboto-regular.ttf');
 }
 
+.msg-block {
+    font-family: roboto-black;
+    background: rgb(158,0,0);
+    color: rgb(255,255,255);
+    margin-bottom: 14px;
+}
+
+.msg-block p {
+    margin: 0 0 0 0;
+    font-weight: bold;
+    padding: 10px;
+}
+
 .auth-grid {
     display: grid;
     grid-template-rows: 29vh 225px 29vh;

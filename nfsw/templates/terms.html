@@ -4,71 +4,81 @@
 
 {% block content %}
 
-<article class="terms-block">
-    <header>
-        <h1>NFSW</h1>
-    </header>
+<div class="terms-grid">
+    <div class="terms-grid-item">
+        <article class="terms-block">
+            <header>
+                <h1>NFSW</h1>
+            </header>
 
-    <section class="terms">
-        <header>
-            <h1>Terms &amp; Conditions</h1>
-        </header>
+            <section class="terms">
+                <header>
+                    <h1>Terms &amp; Conditions</h1>
+                </header>
 
-        <p>NFSW will expose you to content that may be considered
-            unpalatable, offensive, rude, or crass.</p>
+                <p>NFSW will expose you to content that may be considered
+                    unpalatable, offensive, rude, or crass.</p>
 
-        <p>In no event unless required by applicable law will the
-            copyright holder be liable to you for damages, including
-            any general, special, psychological, incidental or
-            consequential damages arising out of playing NFSW,
-            even if the holder has been advised or is aware of the
-            possibility of such damages.</p>
+                <p>In no event unless required by applicable law will the
+                    copyright holder be liable to you for damages, including
+                    any general, special, psychological, incidental or
+                    consequential damages arising out of playing NFSW,
+                    even if the holder has been advised or is aware of the
+                    possibility of such damages.</p>
 
-        <div class="lastupdated">
-            <p>Last Updated on the 21st October 2019</p>
-        </div>
-    </section>
+                <div class="lastupdated">
+                    <p>Last Updated on the 21st October 2019</p>
+                </div>
+            </section>
 
-    <section class="privacy">
-        <header>
-            <h1>Privacy Policy</h1>
-        </header>
+            <section class="privacy">
+                <header>
+                    <h1>Privacy Policy</h1>
+                </header>
 
-        <p>All your interactions with NFSW game or your "game state"
-            will be stashed in a temporary cache.</p>
+                <p>All your interactions with NFSW game or your "game state"
+                    will be stashed in a temporary cache.</p>
 
-        <p>Data in the temporary cache attributable to you may be
-           removed when the game is reset or when game's janitor
-           decides to clean it up or when the server gets obliterated
-           on the January 2<sup>nd</sup> 2020.</p>
+                <p>Data in the temporary cache attributable to you may be
+                    removed when the game is reset or when game's janitor
+                    decides to clean it up or when the server gets obliterated
+                    on the January 2<sup>nd</sup> 2020.</p>
 
-        <p>The game server might also log your IP address
-            automatically each time you communicate with it. Access
-            logs will be purged on the same day the server gets
-            obliterated.</p>
+                <p>The game server might also log your IP address
+                    automatically each time you communicate with it. Access
+                    logs will be purged on the same day the server gets
+                    obliterated.</p>
 
-        <p>Lastly, remember that you're on the Internet where Privacy
-           is not a first class citizen. Tread with caution.</p>
+                <p>Lastly, remember that you're on the Internet where Privacy
+                    is not a first class citizen. Tread with caution.</p>
 
-        <div class="lastupdated">
-            <p>Last Updated on the 21st October 2019</p>
-        </div>
-    </section>
+                <div class="lastupdated">
+                    <p>Last Updated on the 21st October 2019</p>
+                </div>
+            </section>
 
-    <form class="agree" method="post">
-        <div class="form-group agree">
-            <label for="agree">
-                <input type="checkbox" name="agree"
-                       class="agree" value="1">
-                I agree to the Terms &amp; Conditions and the Privacy
-                Policy.
-            </label>
-        </div>
+            <form class="agree" method="post">
+                <div class="form-group agree">
+                    <label for="agree">
+                        <input type="checkbox" id="agree"
+                               name="agree"
+                               class="agree" value="1">
+                        I agree to the Terms &amp; Conditions and the Privacy
+                        Policy.
+                    </label>
+                </div>
 
-        <div class="button-group">
-            <input type="submit" value="Submit">
-        </div>
-    </form>
-</article>
+                <div class="button-group">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+        </article>
+    </div>
+</div>
 
+
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='terms.css') }}">
 {% endblock %}

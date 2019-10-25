@@ -191,6 +191,6 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id=?', (user_id,)
         ).fetchone()
 
-        if (request.endpoint not in ['auth.terms', 'auth.sorry']
+        if (request.endpoint not in ['auth.terms', 'auth.sorry', 'static']
             and g.user['terms_agreed'] != 1):
             return redirect(url_for('auth.terms'))

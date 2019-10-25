@@ -1,0 +1,70 @@
+@font-face {
+    font-family: roboto-black;
+    src: url('./fonts/roboto-black.ttf');
+}
+
+@font-face {
+    font-family: roboto-medium;
+    src: url('./fonts/roboto-medium.ttf');
+}
+
+@font-face {
+    font-family: roboto-regular;
+    src: url('./fonts/roboto-regular.ttf');
+}
+
+.terms-grid {
+    display: grid;
+    grid-template-rows: auto 100vh auto;
+    grid-template-columns: auto 500px auto;
+}
+
+.terms-grid-item {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+header h1, header h2 {
+    font-family: roboto-black;
+}
+
+p, .agree {
+    font-family: roboto-regular;
+}
+
+
+.button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    font-family: roboto-medium;
+    font-size: 16px;
+    border: 1px solid rgb(10, 10,10);
+    background-color: rgb(10,10,10);
+    color: rgb(240,240,240);
+    border-radius: 5px;
+    padding: 8px 10px 8px 10px;
+    cursor: pointer;
+
+}
+
+@media (min-width: 100px) and (max-width: 650px) {
+    .terms-grid {
+        grid-template-columns: auto 85vw auto;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 75vw;
+    }
+}

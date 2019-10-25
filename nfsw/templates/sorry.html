@@ -3,13 +3,21 @@
 {% block title %}Sorry{% endblock %}
 
 {% block content %}
-<article class="sorry-block">
-    <header>
-        <h1>Sorry</h1>
-    </header>
+<div class="sorry-grid">
+    <div class="sorry-grid-item">
+        <div class="sorry-block">
+            <header>
+                <h1>Sorry</h1>
+            </header>
 
-    <p>Alas! sad that you're unable to play.</p>
+            <p>Alas! sad that you're unable to play.</p>
 
-    <p>XOXO.</p>
+            <p>XOXO.</p>
+        </div>
+    </div>
 </div>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='sorry.css') }}">
 {% endblock %}

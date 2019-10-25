@@ -78,3 +78,17 @@ input[type="submit"] {
     cursor: pointer;
 
 }
+
+@media (min-width: 100px) and (max-width: 650px) {
+    .auth-grid {
+        grid-template-columns: auto 80vw auto;
+    }
+
+    .form-group {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 75vw;
+    }
+}

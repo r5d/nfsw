@@ -23,6 +23,8 @@ class RedisC:
         return [
             'log',
 
+            'epilogue:done',
+
             'scene',
             'scene:sexshop:gg',
             'scene:garden:gg',

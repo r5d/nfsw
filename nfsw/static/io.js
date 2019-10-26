@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if ('reset' in r && r.reset) {
-                return window.location.reload();
+                return window.location.href = '/epilogue';
             }
 
             return barfslow(r.ans, 'concierge', qipoff);

@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         window.setTimeout(
-            barfslow, 25,
+            barfslow, 0,
             txt.substring(1, txt.length),
             type,
             cb,

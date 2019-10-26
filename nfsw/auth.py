@@ -12,6 +12,7 @@ from werkzeug.security import (
 )
 
 from nfsw.db import get_db
+from nfsw.redis import redis
 
 
 bp = Blueprint('auth', __name__)
@@ -174,11 +175,9 @@ def sorry():
     return render_template('sorry.html')
 
 
-@bp.route('/logout')
-@login_required
 def logout():
+    redis().delete('epilogue:done')
     session.clear()
-    return redirect(url_for('index'))
 
 
 @bp.before_app_request

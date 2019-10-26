@@ -363,6 +363,16 @@ def coitus(o):
 
 
     def gg():
+        gg_last =  '\n'.join([
+            'Your concierge is busy',
+            'masturbating. He his unable',
+            'to respond to you at the moment'
+        ])
+
+        if fucked():
+            return gg_last
+
+
         l = len(gobbledygook)
 
         for i in range(0, l):
@@ -372,11 +382,7 @@ def coitus(o):
             r.sadd('scene:coitus:gg', i)
             return gobbledygook[i]
 
-        return '\n'.join([
-            'Your concierge is busy',
-            'masturbating. He his unable',
-            'to respond to you at the moment'
-        ])
+        return gg_last
 
 
     def intro():

@@ -21,16 +21,22 @@ class RedisC:
 
     def keys(self):
         return [
-            self.key('log'),
+            'log',
 
-            self.key('scene'),
-            self.key('scene:sexshop:gg'),
-            self.key('scenes:done'),
+            'scene',
+            'scene:sexshop:gg',
+            'scene:garden:gg',
+            'scene:nymphomaniac:gg',
+            'scene:nymphomaniac:gg-hunk',
+            'scene:coitus:gg',
+            'scene:coitus:fucked',
+            'scene:strayed:gg',
+            'scene:xkcd:gg',
+            'scenes:done',
 
-
-            self.key('player:type'),
-            self.key('player:type:body'),
-            self.key('player:type:mind'),
+            'player:type',
+            'player:type:body',
+            'player:type:mind',
         ]
 
 

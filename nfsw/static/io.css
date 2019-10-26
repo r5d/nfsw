@@ -1,6 +1,11 @@
+@font-face {
+    font-family: noto-mono;
+    src: url('/static/fonts/noto-mono.ttf');
+}
+
 body {
-    font-family: monospace;
-    font-size: 1em;
+    font-family: noto-mono;
+    font-size: 0.88em;
     overflow: hidden;
     margin: 0 0 0 0;
 }
@@ -15,12 +20,13 @@ body {
 
 .console {
     overflow-y: auto;
-    flex: 1 0 90%;
+    flex: 1 0 80vh;
     margin-left: 15px;
     margin-bottom: 10px;
 }
 
 .console pre.concierge {
+    font-family: noto-mono;
     margin: 0 0 0 0;
     border-left: 2px solid rgb(180,180,240);
     padding-left: 5px;
@@ -56,7 +62,7 @@ body {
     font-size: 1.2em;
     padding-left: 5px;
     border: 2px solid rgb(230,230,230);
-    font-family: monospace;
+    font-family: noto-mono;
 }
 
 .prompt input:focus {

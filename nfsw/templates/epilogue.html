@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Epilogue{% endblock %}
+
+{% block content %}
+
+<div class="epilogue-wrapper">
+    <div class="epilogue-grid">
+        <div class="epilogue-grid-item">
+            <div class="epilogue-content">
+                <header>
+                    <h1>NFSW!</h1>
+                    <h2>a ricketyspace production</h2>
+                </header>
+
+                <p>&hellip;</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<noscript>
+    <div class="noscript-grid">
+        <div class="noscript-grid-item">
+            <div class="noscript-content">
+                <header>
+                    <h1>Oops, JavaScript is disabled!</h1>
+                </header>
+
+                <p>
+                    You'll need to enable JavaScript in order to
+                    play NFSW.
+                </p>
+
+            </div>
+        </div>
+    </div>
+</noscript>
+
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='epilogue.css') }}">
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='epilogue.js') }}"></script>
+{% endblock %}

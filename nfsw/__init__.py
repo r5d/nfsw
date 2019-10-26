@@ -40,6 +40,11 @@ def create_app(test_config=None):
     app.register_blueprint(io.bp)
     app.add_url_rule('/io', endpoint='io')
 
+    # register epilogue blueprint
+    from nfsw import epilogue
+
+    app.register_blueprint(epilogue.bp)
+    app.add_url_rule('/epilogue', endpoint='epilogue')
 
     @app.route('/', endpoint='index')
     @auth.anon_only

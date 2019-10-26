@@ -35,6 +35,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 );
             }
 
+            if ('logout' in r && r.logout) {
+                return window.location.href = '/';
+            }
+
             if ('reset' in r && r.reset) {
                 return window.location.href = '/epilogue';
             }

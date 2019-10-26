@@ -2,7 +2,7 @@ import functools
 
 import nfsw.scenes as scenes
 
-from nfsw.auth import login_required, login_required_ajax
+from nfsw.auth import login_required, login_required_ajax, logout
 from nfsw.redis import redis
 from nfsw.scenes import current_scene
 from nfsw.util import read_junk
@@ -63,6 +63,16 @@ def query():
 
     # Log query.
     r.rpush('log', q)
+
+
+    # logout
+    if q == 'nfsw logout':
+        logout()
+        return {
+            'ans': 'Logging you out...',
+            'logout': True
+        }
+
 
     # help.
     if q == 'help':

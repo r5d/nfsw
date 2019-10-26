@@ -14,4 +14,9 @@ bp = Blueprint('epilogue', __name__)
 def epilogue():
     r = redis()
 
+    if r.exists('epilogue:done'):
+        return redirect(url_for('io'))
+
+    r.set('epilogue:done', 1)
+
     return render_template('epilogue.html')

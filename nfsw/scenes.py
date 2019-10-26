@@ -249,7 +249,7 @@ def nymphomaniac(o):
         'Can\'t do nothin\' with hunk.'
         '\nBetter luck next time',
         'Next time you try to do anything with the hunk'
-        '\nI\'m going to force you to eat his dingle berries',
+        '\nI\'m going to force you to eat his dingle berries.',
         'Stop your infatuation with the hunk.'
         '\nForget his dingle berries.'
         '\nEven better.'

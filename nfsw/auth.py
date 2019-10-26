@@ -6,6 +6,7 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request,
     session, url_for
 )
+
 from werkzeug.security import (
     check_password_hash, generate_password_hash
 )
@@ -44,7 +45,7 @@ def anon_only(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is not None:
-            return redirect(url_for('io'))
+            return redirect(url_for('epilogue'))
 
         return view(**kwargs)
 
@@ -55,7 +56,7 @@ def not_agreed(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user['terms_agreed']:
-            return redirect(url_for('io'))
+            return redirect(url_for('epilogue'))
 
         return view(**kwargs)
 
@@ -95,7 +96,7 @@ def login():
         session.clear()
         session['user_id'] = user['id']
 
-        return redirect(url_for('io'))
+        return redirect(url_for('epilogue'))
 
     return render()
 
@@ -160,7 +161,7 @@ def terms():
             (g.user['id'],))
         db.commit()
 
-        return redirect(url_for('io'))
+        return redirect(url_for('epilogue'))
 
     return render_template('terms.html')
 

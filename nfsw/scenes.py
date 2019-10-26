@@ -380,6 +380,9 @@ def coitus(o):
 
 
     def intro():
+        if fucked():
+            return rj('mirror-intro')
+
         return rj('intro-{}'.format(type))
 
 
@@ -400,7 +403,10 @@ def coitus(o):
     def fuck(q):
         r.set('scene:coitus:fucked', 1)
 
-        return rj('fuck-{}'.format(type))
+        return '\n\n'.join([
+            rj('fuck-{}'.format(type)),
+            rj('mirror-intro')
+        ])
 
 
     def mirror(q):

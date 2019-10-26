@@ -630,7 +630,7 @@ def thanks(o):
     r = redis()
 
     if r.sismember('scenes:done', 'thanks'):
-        return ''
+        return 'You\'ve finished the game!'
 
     # Mark scene done
     r.sadd('scenes:done', 'thanks')

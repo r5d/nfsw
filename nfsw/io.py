@@ -43,22 +43,8 @@ def io():
 def reset():
     r = redis()
 
-    r.delete('scene')
-    r.delete('scene:sexshop:gg')
-    r.delete('scene:nymphomaniac:gg')
-    r.delete('scene:nymphomaniac:gg-hunk')
-    r.delete('scene:coitus:gg')
-    r.delete('scene:coitus:fucked')
-    r.delete('scene:strayed:gg')
-    r.delete('scene:xkcd:gg')
-    r.delete('scenes:done')
-
-    r.delete('player:type')
-    r.delete('player:type:body')
-    r.delete('player:type:mind')
-    r.delete('player:type:mind')
-
-    r.delete('log')
+    for k in r.keys():
+        r.delete(k)
 
     return 'Game reset'
 

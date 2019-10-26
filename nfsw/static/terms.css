@@ -1,16 +1,16 @@
 @font-face {
     font-family: roboto-black;
-    src: url('./fonts/roboto-black.ttf');
+    src: url('/static/fonts/roboto-black.ttf');
 }
 
 @font-face {
     font-family: roboto-medium;
-    src: url('./fonts/roboto-medium.ttf');
+    src: url('/static/fonts/roboto-medium.ttf');
 }
 
 @font-face {
     font-family: roboto-regular;
-    src: url('./fonts/roboto-regular.ttf');
+    src: url('/static/fonts/roboto-regular.ttf');
 }
 
 .terms-grid {

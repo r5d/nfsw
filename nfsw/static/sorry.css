@@ -1,6 +1,6 @@
 @font-face {
     font-family: roboto-black;
-    src: url('./fonts/roboto-black.ttf');
+    src: url('/static/fonts/roboto-black.ttf');
 }
 
 @font-face {

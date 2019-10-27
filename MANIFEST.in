@@ -1,0 +1,6 @@
+include nfsw/schema.sql
+graft nfsw/cow
+graft nfsw/junk
+graft nfsw/static
+graft nfsw/templates
+global-exclude *.pyc

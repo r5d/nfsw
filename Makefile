@@ -33,5 +33,6 @@ venv:
 
 
 jsh:
-	@${JSHINT} nfsw/static/io.js
+	${JSHINT} nfsw/static/io.js
+	${JSHINT} nfsw/static/epilogue.js
 .PHONY: jsh

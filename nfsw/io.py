@@ -97,6 +97,12 @@ def query():
             'reset': True
         }
 
+    # colophon
+    if q == 'colophon':
+        return {
+            'ans': read_junk('colophon/ohno')
+        }
+
     # Get current scene.
     scene = current_scene()
     if scene is None:

@@ -44,11 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if ('logout' in r && r.logout) {
-                return window.location.href = '/';
+                window.location.href = '/';
             }
 
             if ('reset' in r && r.reset) {
-                return window.location.href = '/epilogue';
+                window.location.href = '/epilogue';
             }
 
             return barfslow(r.ans, 'concierge', qipoff);

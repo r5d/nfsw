@@ -1,3 +1,11 @@
+/**
+ * SPDX-License-Identifier: ISC
+ *
+ * Copyright (C) 2019 rsiddharth <s@ricketyspace.net>
+ *
+ * This file is part of dingy.
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
     /**
      * Handling for sending commands to server.

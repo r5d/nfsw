@@ -36,3 +36,9 @@ jsh:
 	${JSHINT} nfsw/static/io.js
 	${JSHINT} nfsw/static/epilogue.js
 .PHONY: jsh
+
+
+build:
+	python setup.py bdist_wheel
+.PHONY: build
+

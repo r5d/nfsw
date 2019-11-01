@@ -1,6 +1,6 @@
 # nfsw
 
-A text based adventure for friends as a christmas gag gift.
+A quirky text based adventure for friends as a gag gift.
 
 NSFW stands for NFSW is Full of Slimy Warts.
 

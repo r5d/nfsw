@@ -44,4 +44,5 @@ build:
 
 clean:
 	rm -rf build/ dist/ nfsw.egg-info/
+	find ./ -type d -name '__pycache__' -exec rm -rf {} +
 .PHONY: clean

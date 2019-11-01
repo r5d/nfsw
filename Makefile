@@ -4,10 +4,10 @@
 #
 #   Copyright (C) 2019 rsiddharth <s@ricketyspace.net>
 #
-#   This file is part of dingy.
+#   This file is part of nfsw.
 #
 
-VENV_DIR=/usr/local/virtualenv/.dingy
+VENV_DIR=/usr/local/virtualenv/.nfsw
 VENV_CMD=virtualenv-3
 JSHINT=~/.npm-packages/bin/jshint
 

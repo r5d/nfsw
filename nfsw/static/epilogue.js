@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2019 rsiddharth <s@ricketyspace.net>
  *
- * This file is part of dingy.
+ * This file is part of nfsw.
  */
 
 document.addEventListener('DOMContentLoaded', function() {

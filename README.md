@@ -1,8 +1,4 @@
-# dingy
-
-An umbrella project for unpalatable experiments.
-
-## nfsw
+# nfsw
 
 A text based adventure for friends as a christmas gag gift.
 
@@ -19,5 +15,5 @@ GNU/Linux VM though.
 
 # license
 
-Everything under the dingy project, unless otherwise stated, is
-licensed under the ISC license.
+Everything, unless otherwise stated, is licensed under the ISC
+license.

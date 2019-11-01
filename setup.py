@@ -9,12 +9,31 @@
 
 from setuptools import find_packages, setup
 
+with open('README.md', 'r') as f:
+    ldesc = f.read()
+
 
 setup(
-    name='dingy',
+    name='nfsw',
     version='0.1.0.dev0',
+    license='ISC',
+    author='rsiddharth',
+    author_email='s@ricketyspace.net',
+    description='A quirky text based adverture',
+    long_description=ldesc,
+    long_description_content_type='text/markdown',
+    url='https://ricketyspace.net/nfsw',
     packages=find_packages(),
     include_package_data=True,
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Environment :: Web Environment',
+        'Framework :: Flask',
+        'License :: OSI Approved :: ISC License (ISCL)',
+        'Operating System :: POSIX :: BSD :: OpenBSD',
+        'Topic :: Games/Entertainment',
+    ],
+    platforms='OpenBSD',
     zip_safe=False,
     install_requires=[
         'flask==1.1.1',

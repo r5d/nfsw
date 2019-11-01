@@ -42,3 +42,6 @@ build:
 	python setup.py bdist_wheel
 .PHONY: build
 
+clean:
+	rm -rf build/ dist/ nfsw.egg-info/
+.PHONY: clean

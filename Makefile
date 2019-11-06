@@ -57,6 +57,15 @@ prd-venv:
 		${VENV_DIR}-prd\\"
 .PHONY: prd-venv
 
+prd-install:
+	ssh root@${PRD_HOST} \\"mkdir -p /var/www/nfsw/wheel/\\"
+	scp dist/${PRD_WHEEL} \
+		root@${PRD_HOST}:/var/www/nfsw/wheel/
+	ssh root@${PRD_HOST} \\". ${VENV_DIR}-prd/bin/activate \
+		&& pip install /var/www/nfsw/wheel/${PRD_WHEEL} \\"
+.PHONY: prd-install
+
+
 clean:
 	rm -rf build/ dist/ nfsw.egg-info/
 	find ./ -type d -name '__pycache__' -exec rm -rf {} +

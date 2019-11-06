@@ -44,6 +44,13 @@ build:
 	python setup.py bdist_wheel
 .PHONY: build
 
+
+prd-user:
+	ssh root@${PRD_HOST} \\"useradd -v -c 'NFSW daemon' \
+		-e 0 -L daemon -s /sbin/nologin \
+		-d /var/empty _nfsw\\"
+.PHONY: prov-user
+
 clean:
 	rm -rf build/ dist/ nfsw.egg-info/
 	find ./ -type d -name '__pycache__' -exec rm -rf {} +

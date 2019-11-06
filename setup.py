@@ -15,7 +15,7 @@ with open('README.md', 'r') as f:
 
 setup(
     name='nfsw',
-    version='0.1.0.dev0',
+    version='0.1.0.dev1',
     license='ISC',
     author='rsiddharth',
     author_email='s@ricketyspace.net',
@@ -37,6 +37,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'flask==1.1.1',
-        'redis==3.3.8'
+        'redis==3.3.8',
+        'uwsgi==2.0.18'
     ]
 )

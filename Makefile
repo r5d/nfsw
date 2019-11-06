@@ -51,6 +51,12 @@ prd-user:
 		-d /var/empty _nfsw\\"
 .PHONY: prov-user
 
+prd-venv:
+	ssh root@${PRD_HOST} \\"mkdir -p /usr/local/virtualenv/ &&  \
+		${VENV_CMD} --clear --python=python3 \
+		${VENV_DIR}-prd\\"
+.PHONY: prd-venv
+
 clean:
 	rm -rf build/ dist/ nfsw.egg-info/
 	find ./ -type d -name '__pycache__' -exec rm -rf {} +

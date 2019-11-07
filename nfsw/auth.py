@@ -123,8 +123,6 @@ def register():
     db = get_db()
 
     if request.method == 'POST':
-        print(request.form)
-
         username = request.form['username']
         password = request.form['password']
 

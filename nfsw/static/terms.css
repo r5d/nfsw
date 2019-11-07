@@ -42,6 +42,10 @@ p, .agree {
     font-family: roboto-regular;
 }
 
+.lastupdated {
+    font-size: 14px;
+    color: rgb(150, 150, 150);
+}
 
 .button-group {
     display: flex;

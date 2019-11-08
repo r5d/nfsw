@@ -1,0 +1,18 @@
+#!/bin/ksh
+#
+# Copyright (C) 2019 rsiddharth <s@ricketyspace.net>
+#
+# SPDX-License-Identifier: ISC
+#
+#
+
+daemon="/usr/local/virtualenv/.nfsw-prd/bin/uwsgi"
+daemon_flags="-H /usr/local/virtualenv/.nfsw-prd -s 127.0.0.1:4201 --manage-script-name --mount /=nfsw.uwsgi:app --workers 4 --daemonize /var/www/logs/uwsgi.log"
+
+export FLASK_APP=nfsw
+
+. /etc/rc.d/rc.subr
+
+rc_reload=NO
+
+rc_cmd $1

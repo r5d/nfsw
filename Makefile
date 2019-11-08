@@ -12,6 +12,7 @@ VENV_CMD=virtualenv-3
 JSHINT=~/.npm-packages/bin/jshint
 PRD_HOST=cygnus
 PRD_WHEEL=nfsw-0.1.0.dev1-py3-none-any.whl
+RC_D=etc/rc.d/nfsw
 
 dunno:
 	@echo "Give me somepin to make"
@@ -64,6 +65,12 @@ prd-install:
 	ssh root@${PRD_HOST} \\". ${VENV_DIR}-prd/bin/activate \
 		&& pip install /var/www/nfsw/wheel/${PRD_WHEEL} \\"
 .PHONY: prd-install
+
+rcd:
+	scp ${RC_D} root@${PRD_HOST}:/${RC_D}
+	ssh root@${PRD_HOST} chmod 555 /${RC_D}
+	ssh root@${PRD_HOST} chown root:wheel /${RC_D}
+.PHONY: rcd
 
 
 clean:

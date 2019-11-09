@@ -71,6 +71,14 @@ prd-install:
 		&& chown -R _nfsw:wheel /var/www/nfsw/ \\"
 .PHONY: prd-install
 
+
+prd-initdb:
+	ssh root@${PRD_HOST} \\". ${VENV_DIR}-prd/bin/activate \
+		&& FLASK_APP=nfsw flask init-db \
+		&& chown -R _nfsw:wheel ${VENV_DIR}-prd \\"
+.PHONY: prd-initdb
+
+
 rcd:
 	scp ${RC_D} root@${PRD_HOST}:/${RC_D}
 	ssh root@${PRD_HOST} chmod 555 /${RC_D}

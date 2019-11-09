@@ -79,6 +79,12 @@ prd-initdb:
 .PHONY: prd-initdb
 
 
+prd-uninstall:
+	ssh root@${PRD_HOST} \\". ${VENV_DIR}-prd/bin/activate \
+		&& pip uninstall nfsw \\"
+.PHONY: prd-install
+
+
 rcd:
 	scp ${RC_D} root@${PRD_HOST}:/${RC_D}
 	ssh root@${PRD_HOST} chmod 555 /${RC_D}

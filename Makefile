@@ -12,6 +12,7 @@ VENV_CMD=virtualenv-3
 JSHINT=~/.npm-packages/bin/jshint
 PRD_HOST=cygnus
 PRD_WHEEL=nfsw-0.1.0.dev1-py3-none-any.whl
+UWSGI_INI=etc/uwsgi/nfsw.ini
 RC_D=etc/rc.d/nfsw
 
 dunno:
@@ -86,8 +87,11 @@ prd-uninstall:
 
 
 rcd:
+	ssh root@${PRD_HOST} mkdir -p -m 755 /etc/uwsgi
+	scp ${UWSGI_INI} root@${PRD_HOST}:/${UWSGI_INI}
 	scp ${RC_D} root@${PRD_HOST}:/${RC_D}
 	ssh root@${PRD_HOST} chmod 555 /${RC_D}
+	ssh root@${PRD_HOST} chmod 444 /${UWSGI_INI}
 	ssh root@${PRD_HOST} chown root:wheel /${RC_D}
 .PHONY: rcd
 

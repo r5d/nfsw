@@ -66,7 +66,9 @@ prd-install:
 	scp dist/${PRD_WHEEL} \
 		root@${PRD_HOST}:/var/www/nfsw/wheel/
 	ssh root@${PRD_HOST} \\". ${VENV_DIR}-prd/bin/activate \
-		&& pip install /var/www/nfsw/wheel/${PRD_WHEEL} \\"
+		&& pip install /var/www/nfsw/wheel/${PRD_WHEEL} \
+		&& chown -R _nfsw:wheel ${VENV_DIR}-prd \
+		&& chown -R _nfsw:wheel /var/www/nfsw/ \\"
 .PHONY: prd-install
 
 rcd:

@@ -7,7 +7,8 @@
 #
 
 daemon="/usr/local/virtualenv/.nfsw-prd/bin/uwsgi"
-daemon_flags="-H /usr/local/virtualenv/.nfsw-prd -s 127.0.0.1:4201 --manage-script-name --mount /=nfsw.uwsgi:app --workers 4 --daemonize /var/www/logs/uwsgi.log"
+daemon_flags="--ini /etc/uwsgi/nfsw.ini"
+daemon_user=_nfsw
 
 export FLASK_APP=nfsw
 

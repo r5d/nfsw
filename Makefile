@@ -86,14 +86,14 @@ prd-uninstall:
 .PHONY: prd-install
 
 
-rcd:
+prd-rcd:
 	ssh root@${PRD_HOST} mkdir -p -m 755 /etc/uwsgi
 	scp ${UWSGI_INI} root@${PRD_HOST}:/${UWSGI_INI}
 	scp ${RC_D} root@${PRD_HOST}:/${RC_D}
 	ssh root@${PRD_HOST} chmod 555 /${RC_D}
 	ssh root@${PRD_HOST} chmod 444 /${UWSGI_INI}
 	ssh root@${PRD_HOST} chown root:wheel /${RC_D}
-.PHONY: rcd
+.PHONY: prd-rcd
 
 
 clean:

@@ -11,7 +11,7 @@ VENV_DIR=/usr/local/virtualenv/.nfsw
 VENV_CMD=virtualenv-3
 JSHINT=~/.npm-packages/bin/jshint
 PRD_HOST=cygnus
-PRD_WHEEL=nfsw-0.1.0.dev1-py3-none-any.whl
+PRD_WHEEL=nfsw-0.1.0.dev2-py3-none-any.whl
 UWSGI_INI=etc/uwsgi/nfsw.ini
 RC_D=etc/rc.d/nfsw
 

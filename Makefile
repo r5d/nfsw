@@ -66,6 +66,9 @@ prd-httpd:
 	ssh root@${PRD_HOST} \\"rcctl enable httpd \
 		&& rcctl restart httpd \\"
 
+prd-acme:
+	scp ${ACME_CONF} root@${PRD_HOST}:/${ACME_CONF}
+
 
 prd-user:
 	ssh root@${PRD_HOST} \\"useradd -v -c 'NFSW daemon' \

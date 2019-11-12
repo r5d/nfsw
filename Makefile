@@ -58,6 +58,7 @@ prd-init:
 	&& git -C /etc init \
 	&& git -C /etc add . \
 	&& git -C /etc commit -m 'Initial commit' \
+.PHONY: prd-init
 
 
 prd-httpd:
@@ -65,16 +66,19 @@ prd-httpd:
 
 	ssh root@${PRD_HOST} \\"rcctl enable httpd \
 		&& rcctl restart httpd \\"
+.PHONY: prd-httpd
+
 
 prd-acme:
 	scp ${ACME_CONF} root@${PRD_HOST}:/${ACME_CONF}
+.PHONY: prd-acme
 
 
 prd-user:
 	ssh root@${PRD_HOST} \\"useradd -v -c 'NFSW daemon' \
 		-e 0 -L daemon -s /sbin/nologin \
 		-d /var/empty _nfsw\\"
-.PHONY: prov-user
+.PHONY: prd-user
 
 
 prd-venv:

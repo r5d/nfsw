@@ -60,6 +60,12 @@ prd-init:
 	&& git -C /etc commit -m 'Initial commit' \
 
 
+prd-httpd:
+	scp ${HTTPD_CONF} root@${PRD_HOST}:/${HTTPD_CONF}
+
+	ssh root@${PRD_HOST} \\"rcctl enable httpd \
+		&& rcctl restart httpd \\"
+
 
 prd-user:
 	ssh root@${PRD_HOST} \\"useradd -v -c 'NFSW daemon' \

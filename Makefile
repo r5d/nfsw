@@ -49,6 +49,17 @@ build:
 	python setup.py bdist_wheel
 .PHONY: build
 
+prd-init:
+	ssh root@${PRD_HOST} \\"echo 'https://cdn.openbsd.org/pub/OpenBSD' \
+		> /etc/installurl \
+	&& pkg_add -v git \
+	&& git config --global --add user.name rsiddharth \
+	&& git config --global --add user.email s@ricketyspace.net \
+	&& git -C /etc init \
+	&& git -C /etc add . \
+	&& git -C /etc commit -m 'Initial commit' \
+
+
 
 prd-user:
 	ssh root@${PRD_HOST} \\"useradd -v -c 'NFSW daemon' \

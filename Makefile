@@ -21,6 +21,10 @@ RC_D=etc/rc.d/nfsw
 
 SSH_PUB=ssh/lyra.pub
 
+TB=bin/tball
+TB_CNF=etc/tball
+CRON=cron/root
+
 dunno:
 	@echo "Give me somepin to make"
 
@@ -145,6 +149,16 @@ prd-sk:
 	rsync ${SSH_PUB} root@${PRD_HOST}:~/.ssh/
 	ssh root@${PRD_HOST} cat ~/.ssh/${SSH_PUB} >> ~/.authorized_keys
 .PHONY: prd-sk
+
+prd-tb:
+	rsync -a ${TB} root@${PRD_HOST}:/usr/local/bin/tball
+	rsync -a ${TB_CNF} root@${PRD_HOST}:/${TB_CNF}
+	rsync -a ${CRON} root@${PRD_HOST}:~/.cron
+	ssh root@${PRD_HOST} \\"mkdir -p \
+			/var/backups/nfsw/instance \
+		&& crontab ~/.cron \
+		&& git -C /etc add tball\\"
+.PHONY: prd-tb
 
 clean:
 	rm -rf build/ dist/ nfsw.egg-info/

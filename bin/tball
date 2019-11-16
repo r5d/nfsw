@@ -1,0 +1,254 @@
+#!/usr/local/bin/bash
+#
+# License: CC0-1.0
+#
+#  Usage:
+#
+#    $ tball /path/to/tball-info.txt
+#
+#
+
+parse_opts() {
+    export TBFILE=$1
+    if [ -z $TBFILE ]; then
+        echo 'Info file not passed! Exiting.'
+        exit 1
+    fi
+    if [ ! -f $TBFILE ]; then
+        echo $TBFILE 'does not exist! Exiting.'
+        exit 1
+    fi
+}
+
+parse_src() {
+    if [ ! -d $1 ] && [ ! -f $1 ]; then
+        echo 'Source "'$1'" does not exists'
+        exit 1
+    fi
+
+    return 0
+}
+
+parse_bdest() {
+    if [ ! -d $1 ]; then
+        echo 'Making '$1' ...'
+        mkdir -p $1
+        [[ $? == 1 ]] && exit 1
+    fi
+
+    return 0
+}
+
+setup_dest() {
+    export DEST=$1/$2
+
+    if [ ! -d $DEST ]; then
+        echo 'Making '$DEST' ...'
+        mkdir -p $DEST
+        [[ $? == 1 ]] && exit 1
+    fi
+}
+
+clean_tmp() {
+    echo 'Cleaning up... '$1
+    rm -rf $1
+}
+
+file_updated() {
+    local SRC=$1
+    local DEST=$2
+
+    # Get modified time for file
+    local FTIME=$(stat -r $SRC | cut -d ' ' -f 10)
+
+    # Get the last time source was tballed.
+    local TBALLT=$(find $DEST -type f -name '.suffixes' -exec cat '{}' \; \
+                 | tail -n 1)
+    [[ -z $TBALLT ]] && return 1 # source not tballed at all.
+
+    # Check if file was updated after the last tball.
+    [[ $FTIME -gt $TBALLT ]] && return 1
+
+    return 0
+}
+
+dir_updated() {
+    local SRC=$1
+    local DEST=$2
+
+    # Get file that was last modified in this directory.
+    local F=$(find $SRC -type f -exec stat -r '{}' \; \
+          | sort -r -k 10 | head -n 1 | cut -d ' ' -f 15);
+
+    return $(file_updated $F $DEST)
+}
+
+should_tb() {
+    local SRC=$1
+    local DEST=$2
+
+    # Get the number of tballs that exists
+    local TBALLS=$(find $DEST -type f -name '*.enchive' | wc -l)
+    [[ $TBALLS == 0 ]] && return 1
+
+    if [ -d $SRC ]; then
+        # Check if any files under this directory was modified <= 24hrs
+        return $(dir_updated $SRC $DEST)
+    else
+        return $(file_updated $SRC $DEST)
+    fi
+}
+
+parse_maxtb() {
+    local MAX=$1
+
+    if [ -z $MAX ]; then
+        echo 10
+    else
+        echo $MAX
+    fi
+}
+
+rm_file() {
+    local F=$1
+
+    if [ ! -f $F ]; then
+        echo 'File not found: Cannot remove '$F
+        return 0
+    fi
+
+    # Remove file.
+    echo 'Removing '$F'...'
+    rm $F && return 0
+
+    return 1 # rm failed
+}
+
+clean_ol_tbs() {
+    local D=$1
+    local S=$1/.suffixes
+    local MAX=$2 # TODO: check MAX's value.
+
+    # Check if suffixes file exists.
+    if [ ! -f $S ]; then
+        echo 'Cannot remove old tballs at '$1 \
+             ': .suffixes not found'
+        return 0
+    fi
+
+    # Get total timestamps.
+    local TOTT=$(wc -l $S | sed  -E 's/^ +//' | cut -f 1 -d ' ')
+
+    if [ $TOTT -lt $MAX ]; then
+        echo 'No old tballs to clean up [0]'
+        return 0
+    fi
+
+    # Get number of timestamps to remove.
+    local RM=$(($TOTT-$MAX))
+    if [ $RM -lt 1 ]; then
+        echo 'No old tballs to clean up [1]'
+        return 0
+    fi
+
+    # Make temp dir.
+    local TMP_DIR=$(mktemp -d /tmp/clean_tb.XXXXXX)
+    [[ $? == 1 ]] && exit 1
+
+    # Get timestamps to remove.
+    local RMT=$TMP_DIR/rmt
+    $(head -n $RM $S > $RMT)
+    [[ $? == 1 ]] && exit 1
+
+    # Get timestamps to keep.
+    local KT=$TMP_DIR/kt
+    $(tail -n $MAX $S > $KT)
+    [[ $? == 1 ]] && exit 1
+
+    # Get basename.
+    local BN=$(basename $D)
+
+    echo 'Removing old tballs...'
+    while read -r ts; do
+        rm_file $D/$BN.$ts.tar.xz.enchive
+    done <$RMT
+
+    # Update suffixes
+    mv $KT $S
+    [[ $? == 1 ]] && exit 1
+
+    # Clean up tmp dir.
+    rm -rf $TMP_DIR
+
+    return 0
+}
+
+tb() {
+    local SRC=${1/#\~/$HOME}
+    local BDEST=${2/#\~/$HOME}
+    local MAX_TB=$(parse_maxtb $3) # Maximum tballs for a BDEST.
+
+    parse_src $SRC
+    parse_bdest $BDEST
+
+    # Get basename.
+    local BN=$(basename $SRC)
+
+    # Setup destination dir.
+    setup_dest $BDEST $BN
+
+    # Check if source needs to be tballed
+    should_tb $SRC $DEST
+    [[ $? == 0 ]] && \
+        echo $SRC 'is good! Not tballing it' \
+        && clean_ol_tbs $DEST $MAX_TB \
+        && return 0
+
+    # SUFFIX (current unix time)
+    local SUFFIX=$(date '+%s')
+
+    # Make temp dir.
+    local TMP_DIR=$(mktemp -d /tmp/tball.XXXXXX)
+    [[ $? == 1 ]] && exit 1
+
+    # Make ball name
+    local BALL=$TMP_DIR/$BN.$SUFFIX.tar
+    local FLIST=$TMP_DIR/files
+
+    # Make ball.
+    echo 'Making '$BALL'.xz...'
+    if [ ${SRC: -6} == 'tar.xz' ]; then
+        cp $SRC $BALL # SRC is already a tar ball
+    else
+        find $SRC -type f > $FLIST \
+            && tar cvf $BALL -I $FLIST && xz $BALL
+    fi
+    [[ $? == 1 ]] && clean_tmp $TMP_DIR && exit 1
+
+    # Enchive ball.
+    echo 'Enchiving '$BALL'.xz...'
+    enchive archive $BALL.xz
+    [[ $? == 1 ]] && clean_tmp $TMP_DIR && exit 1
+
+    # Drop ball in destination.
+    echo 'rsyncing '$BALL'.enchive to '$DEST'...'
+    rsync $BALL.xz.enchive $DEST
+    [[ $? == 1 ]] && clean_tmp $TMP_DIR && exit 1
+
+    # Store suffix
+    echo $SUFFIX >> $DEST/.suffixes
+
+    # Clean up ol' tballs.
+    clean_ol_tbs $DEST $MAX_TB
+
+    # Clean up
+    clean_tmp $TMP_DIR
+    unset DEST
+}
+
+parse_opts $1
+
+# Tarball 'em all up
+while read -r line; do
+    tb $line
+done <$TBFILE

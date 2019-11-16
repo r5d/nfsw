@@ -107,12 +107,6 @@ prd-initdb:
 .PHONY: prd-initdb
 
 
-prd-uninstall:
-	ssh root@${PRD_HOST} \\". ${VENV_DIR}-prd/bin/activate \
-		&& pip uninstall nfsw \\"
-.PHONY: prd-install
-
-
 prd-rcd:
 	ssh root@${PRD_HOST} mkdir -p -m 755 /etc/uwsgi
 	scp ${UWSGI_INI} root@${PRD_HOST}:/${UWSGI_INI}

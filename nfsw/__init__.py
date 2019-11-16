@@ -25,6 +25,7 @@ def create_app(test_config=None):
     else:
         app.config.from_object(test_config)
 
+    app.url_map.strict_slashes = False
 
     try:
         os.makedirs(app.instance_path)

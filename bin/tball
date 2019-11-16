@@ -88,7 +88,7 @@ should_tb() {
     local DEST=$2
 
     # Get the number of tballs that exists
-    local TBALLS=$(find $DEST -type f -name '*.enchive' | wc -l)
+    local TBALLS=$(find $DEST -type f -name '*.tar.gz' | wc -l)
     [[ $TBALLS == 0 ]] && return 1
 
     if [ -d $SRC ]; then
@@ -170,7 +170,7 @@ clean_ol_tbs() {
 
     echo 'Removing old tballs...'
     while read -r ts; do
-        rm_file $D/$BN.$ts.tar.xz.enchive
+        rm_file $D/$BN.$ts.tar.xz
     done <$RMT
 
     # Update suffixes
@@ -225,14 +225,9 @@ tb() {
     fi
     [[ $? == 1 ]] && clean_tmp $TMP_DIR && exit 1
 
-    # Enchive ball.
-    echo 'Enchiving '$BALL'.xz...'
-    enchive archive $BALL.xz
-    [[ $? == 1 ]] && clean_tmp $TMP_DIR && exit 1
-
     # Drop ball in destination.
-    echo 'rsyncing '$BALL'.enchive to '$DEST'...'
-    rsync $BALL.xz.enchive $DEST
+    echo 'rsyncing '$BALL'.xz to '$DEST'...'
+    rsync $BALL.xz $DEST
     [[ $? == 1 ]] && clean_tmp $TMP_DIR && exit 1
 
     # Store suffix

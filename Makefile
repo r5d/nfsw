@@ -65,7 +65,7 @@ prd-init:
 
 
 prd-httpd:
-	scp ${HTTPD_CONF} root@${PRD_HOST}:/${HTTPD_CONF}
+	rsync ${HTTPD_CONF} root@${PRD_HOST}:/${HTTPD_CONF}
 
 	ssh root@${PRD_HOST} \\"rcctl enable httpd \
 		&& rcctl restart httpd \\"
@@ -73,7 +73,7 @@ prd-httpd:
 
 
 prd-acme:
-	scp ${ACME_CONF} root@${PRD_HOST}:/${ACME_CONF}
+	rsync ${ACME_CONF} root@${PRD_HOST}:/${ACME_CONF}
 .PHONY: prd-acme
 
 
@@ -94,7 +94,7 @@ prd-venv:
 
 prd-install:
 	ssh root@${PRD_HOST} \\"mkdir -p /var/www/nfsw/wheel/\\"
-	scp dist/${PRD_WHEEL} \
+	rsync dist/${PRD_WHEEL} \
 		root@${PRD_HOST}:/var/www/nfsw/wheel/
 	ssh root@${PRD_HOST} \\". ${VENV_DIR}-prd/bin/activate \
 		&& pip install /var/www/nfsw/wheel/${PRD_WHEEL} \
@@ -104,7 +104,7 @@ prd-install:
 
 prd-upgrade:
 	ssh root@${PRD_HOST} \\"mkdir -p /var/www/nfsw/wheel/\\"
-	scp dist/${PRD_WHEEL} \
+	rsync dist/${PRD_WHEEL} \
 		root@${PRD_HOST}:/var/www/nfsw/wheel/
 	ssh root@${PRD_HOST} \\". ${VENV_DIR}-prd/bin/activate \
 		&& pip install --upgrade /var/www/nfsw/wheel/${PRD_WHEEL} \
@@ -122,8 +122,8 @@ prd-initdb:
 
 prd-rcd:
 	ssh root@${PRD_HOST} mkdir -p -m 755 /etc/uwsgi
-	scp ${UWSGI_INI} root@${PRD_HOST}:/${UWSGI_INI}
-	scp ${RC_D} root@${PRD_HOST}:/${RC_D}
+	rsync ${UWSGI_INI} root@${PRD_HOST}:/${UWSGI_INI}
+	rsync ${RC_D} root@${PRD_HOST}:/${RC_D}
 	ssh root@${PRD_HOST} chmod 555 /${RC_D}
 	ssh root@${PRD_HOST} chmod 444 /${UWSGI_INI}
 	ssh root@${PRD_HOST} chown root:wheel /${RC_D}

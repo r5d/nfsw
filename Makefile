@@ -123,11 +123,12 @@ prd-rcd:
 	ssh root@${PRD_HOST} mkdir -p -m 755 /etc/uwsgi
 	rsync ${UWSGI_INI} root@${PRD_HOST}:/${UWSGI_INI}
 	rsync ${RC_D} root@${PRD_HOST}:/${RC_D}
-	ssh root@${PRD_HOST} chmod 555 /${RC_D}
-	ssh root@${PRD_HOST} chmod 444 /${UWSGI_INI}
-	ssh root@${PRD_HOST} chown root:wheel /${RC_D}
-	ssh root@${PRD_HOST} rcctl enable nfsw redis
-	ssh root@${PRD_HOST} rcctl start nfsw redis
+	ssh root@${PRD_HOST} \\"chmod 555 /${RC_D} \
+		&& chmod 444 /${UWSGI_INI} \
+		&& chown root:wheel /${RC_D} \
+		&& rcctl enable nfsw redis \
+		&& rcctl start nfsw redis \
+		&& git -C /etc add rc.conf.local rc.d/nfsw uwsgi/\\"
 .PHONY: prd-rcd
 
 prd-rr:

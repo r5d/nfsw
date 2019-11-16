@@ -126,6 +126,10 @@ prd-rcd:
 	ssh root@${PRD_HOST} chown root:wheel /${RC_D}
 .PHONY: prd-rcd
 
+prd-rr:
+	ssh root@${PRD_HOST} rcctl restart nfsw redis httpd
+.PHONY: prd-reload
+
 
 clean:
 	rm -rf build/ dist/ nfsw.egg-info/

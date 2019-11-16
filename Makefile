@@ -73,7 +73,8 @@ prd-httpd:
 	rsync ${HTTPD_CONF} root@${PRD_HOST}:/${HTTPD_CONF}
 
 	ssh root@${PRD_HOST} \\"rcctl enable httpd \
-		&& rcctl restart httpd \\"
+		&& rcctl restart httpd \
+		&& git -C /etc add httpd.conf rc.conf.local \\"
 .PHONY: prd-httpd
 
 

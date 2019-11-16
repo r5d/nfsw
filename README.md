@@ -9,5 +9,5 @@ game.
 
 # license
 
-Everything, unless otherwise stated, is licensed under the ISC
+Everything here, unless stated otherwise, is licensed under the ISC
 license.

@@ -55,12 +55,17 @@ build:
 prd-init:
 	ssh root@${PRD_HOST} \\"echo 'https://cdn.openbsd.org/pub/OpenBSD' \
 		> /etc/installurl \
-	&& pkg_add -v git redis py3-virtualenv cowsay rsync \
+	&& pkg_add -I -v git redis py3-virtualenv cowsay rsync \
 	&& git config --global --add user.name rsiddharth \
 	&& git config --global --add user.email s@ricketyspace.net \
 	&& git -C /etc init \
 	&& git -C /etc add . \
 	&& git -C /etc commit -m 'Initial commit' \
+	&& useradd -v -c 'NFSW daemon' \
+		-e 0 -L daemon -s /sbin/nologin \
+		-d /var/empty _nfsw \
+	&& git -C /etc add . \
+	&& git -C /etc commit -m 'Add _nfsw user'\\"
 .PHONY: prd-init
 
 
@@ -75,13 +80,6 @@ prd-httpd:
 prd-acme:
 	rsync ${ACME_CONF} root@${PRD_HOST}:/${ACME_CONF}
 .PHONY: prd-acme
-
-
-prd-user:
-	ssh root@${PRD_HOST} \\"useradd -v -c 'NFSW daemon' \
-		-e 0 -L daemon -s /sbin/nologin \
-		-d /var/empty _nfsw\\"
-.PHONY: prd-user
 
 
 prd-venv:

@@ -124,6 +124,8 @@ prd-rcd:
 	ssh root@${PRD_HOST} chmod 555 /${RC_D}
 	ssh root@${PRD_HOST} chmod 444 /${UWSGI_INI}
 	ssh root@${PRD_HOST} chown root:wheel /${RC_D}
+	ssh root@${PRD_HOST} rcctl enable nfsw redis
+	ssh root@${PRD_HOST} rcctl start nfsw redis
 .PHONY: prd-rcd
 
 prd-rr:

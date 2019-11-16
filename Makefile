@@ -119,6 +119,11 @@ prd-initdb:
 .PHONY: prd-initdb
 
 
+prd-config:
+	ssh root@${PRD_HOST} \\"echo \"SECRET_KEY=b'`openssl rand -hex 16`'\" \
+		> ${VENV_DIR}-prd/var/nfsw-instance/config.py\\"
+.PHONY: prd-config
+
 prd-rcd:
 	ssh root@${PRD_HOST} mkdir -p -m 755 /etc/uwsgi
 	rsync ${UWSGI_INI} root@${PRD_HOST}:/${UWSGI_INI}

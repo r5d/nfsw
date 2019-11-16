@@ -19,6 +19,8 @@ ACME_CONF=etc/acme-client.conf
 UWSGI_INI=etc/uwsgi/nfsw.ini
 RC_D=etc/rc.d/nfsw
 
+SSH_PUB=ssh/lyra.pub
+
 dunno:
 	@echo "Give me somepin to make"
 
@@ -133,6 +135,11 @@ prd-rr:
 	ssh root@${PRD_HOST} rcctl restart nfsw redis httpd
 .PHONY: prd-reload
 
+
+prd-sk:
+	rsync ${SSH_PUB} root@${PRD_HOST}:~/.ssh/
+	ssh root@${PRD_HOST} cat ~/.ssh/${SSH_PUB} >> ~/.authorized_keys
+.PHONY: prd-sk
 
 clean:
 	rm -rf build/ dist/ nfsw.egg-info/

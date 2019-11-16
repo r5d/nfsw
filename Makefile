@@ -99,6 +99,16 @@ prd-install:
 		&& chown -R _nfsw:wheel /var/www/nfsw/ \\"
 .PHONY: prd-install
 
+prd-upgrade:
+	ssh root@${PRD_HOST} \\"mkdir -p /var/www/nfsw/wheel/\\"
+	scp dist/${PRD_WHEEL} \
+		root@${PRD_HOST}:/var/www/nfsw/wheel/
+	ssh root@${PRD_HOST} \\". ${VENV_DIR}-prd/bin/activate \
+		&& pip install --upgrade /var/www/nfsw/wheel/${PRD_WHEEL} \
+		&& chown -R _nfsw:wheel ${VENV_DIR}-prd \
+		&& chown -R _nfsw:wheel /var/www/nfsw/ \\"
+.PHONY: prd-upgrade
+
 
 prd-initdb:
 	ssh root@${PRD_HOST} \\". ${VENV_DIR}-prd/bin/activate \

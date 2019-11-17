@@ -151,7 +151,7 @@ prd-rcd:
 		&& chmod 444 /${UWSGI_INI} \
 		&& chown root:wheel /${RC_D} \
 		&& rcctl enable nfsw redis \
-		&& rcctl start nfsw redis \
+		&& rcctl restart nfsw redis \
 		&& git -C /etc add rc.conf.local rc.d/nfsw uwsgi/\\"
 .PHONY: prd-rcd
 

@@ -1,8 +1,7 @@
 # nfsw
 
-A quirky text based adventure for friends as a gag gift.
-
-NSFW stands for NFSW is Full of Slimy Warts.
+NFSW is Fulla Slimy Warts is a quirky text based adventure I made for
+friends as a Christmas gag gift in 2019.
 
 Matt Mullenweg must never play or look at the source code for this
 game.

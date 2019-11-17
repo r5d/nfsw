@@ -146,7 +146,7 @@ prd-rcd:
 .PHONY: prd-rcd
 
 prd-rr:
-	ssh root@${PRD_HOST} rcctl restart nfsw redis httpd
+	ssh root@${PRD_HOST} rcctl restart nfsw redis nginx
 .PHONY: prd-reload
 
 

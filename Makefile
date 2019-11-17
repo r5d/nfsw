@@ -167,6 +167,6 @@ prd-tb:
 .PHONY: prd-tb
 
 clean:
-	rm -rf build/ dist/ nfsw.egg-info/
+	rm -rf build/ dist/ nfsw.egg-info/ instance
 	find ./ -type d -name '__pycache__' -exec rm -rf {} +
 .PHONY: clean

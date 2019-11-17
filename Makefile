@@ -19,6 +19,9 @@ ACME_CONF=etc/acme-client.conf
 UWSGI_INI=etc/uwsgi/nfsw.ini
 RC_D=etc/rc.d/nfsw
 
+NGINX_DIR=etc/nginx
+NEWSYSLOG=etc/newsyslog.conf
+
 SSH_PUB=ssh/lyra.pub
 
 TB=bin/tball
@@ -81,6 +84,17 @@ prd-httpd:
 		&& rcctl restart httpd \
 		&& git -C /etc add httpd.conf rc.conf.local \\"
 .PHONY: prd-httpd
+
+
+prd-nginx:
+	rsync -a ${NGINX_DIR}/ \
+		root@${PRD_HOST}:/${NGINX_DIR}
+	rsync -a ${NEWSYSLOG} \
+		root@${PRD_HOST}:/${NEWSYSLOG}
+	ssh root@${PRD_HOST} \\"rcctl enable nginx \
+		&& rcctl restart nginx \
+		&& git -C /etc add nginx rc.conf.local\\"
+.PHONY: prd-nginx
 
 
 prd-acme:

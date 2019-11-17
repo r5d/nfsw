@@ -14,7 +14,6 @@ JSHINT=~/.npm-packages/bin/jshint
 PRD_HOST=vela
 PRD_WHEEL=nfsw-0.1.0.dev4-py3-none-any.whl
 
-HTTPD_CONF=etc/httpd.conf
 ACME_CONF=etc/acme-client.conf
 UWSGI_INI=etc/uwsgi/nfsw.ini
 RC_D=etc/rc.d/nfsw
@@ -75,15 +74,6 @@ prd-init:
 	&& git -C /etc add . \
 	&& git -C /etc commit -m 'Add _nfsw user'\\"
 .PHONY: prd-init
-
-
-prd-httpd:
-	rsync ${HTTPD_CONF} root@${PRD_HOST}:/${HTTPD_CONF}
-
-	ssh root@${PRD_HOST} \\"rcctl enable httpd \
-		&& rcctl restart httpd \
-		&& git -C /etc add httpd.conf rc.conf.local \\"
-.PHONY: prd-httpd
 
 
 prd-nginx:

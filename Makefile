@@ -22,7 +22,7 @@ RC_D=etc/rc.d/nfsw
 NGINX_DIR=etc/nginx
 NEWSYSLOG=etc/newsyslog.conf
 
-SSH_PUB=ssh/lyra.pub
+SSH_PUB=lyra.pub
 
 TB=bin/tball
 TB_CNF=etc/tball
@@ -161,8 +161,9 @@ prd-rr:
 
 
 prd-sk:
-	rsync ${SSH_PUB} root@${PRD_HOST}:~/.ssh/
-	ssh root@${PRD_HOST} cat ~/.ssh/${SSH_PUB} >> ~/.authorized_keys
+	rsync ssh/${SSH_PUB} root@${PRD_HOST}:~/.ssh/
+	ssh root@${PRD_HOST} \\"cat ~/.ssh/${SSH_PUB} \
+		>> ~/.ssh/authorized_keys\\"
 .PHONY: prd-sk
 
 prd-tb:

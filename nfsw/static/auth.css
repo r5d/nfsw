@@ -64,6 +64,12 @@ header h1 {
     justify-content: flex-start;
 }
 
+.button-group .back a {
+    font-size: 40px;
+    text-decoration: none;
+    color: rgb(10,10,10);
+}
+
 label {
     font-family: roboto-medium;
     font-size: 20px;

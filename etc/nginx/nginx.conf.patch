@@ -1,0 +1,10 @@
+diff --git a/nginx/nginx.conf b/nginx/nginx.conf
+index 156f859..fbcd811 100644
+--- a/nginx/nginx.conf
++++ b/nginx/nginx.conf
+@@ -120,4 +120,5 @@ http {
+     #    ssl_prefer_server_ciphers   on;
+     #}
+ 
++     include /etc/nginx/sites.conf;
+ }

@@ -59,7 +59,8 @@ build:
 prd-init:
 	ssh root@${PRD_HOST} \\"echo 'https://cdn.openbsd.org/pub/OpenBSD' \
 		> /etc/installurl \
-	&& pkg_add -I -v git redis py3-virtualenv cowsay rsync bash \
+	&& pkg_add -I -v git redis py3-virtualenv cowsay \
+			rsync-3.1.3-iconv nginx bash \
 	&& git config --global --add user.name rsiddharth \
 	&& git config --global --add user.email s@ricketyspace.net \
 	&& git -C /etc init \

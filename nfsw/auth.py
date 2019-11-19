@@ -103,6 +103,11 @@ def login():
         elif not check_password_hash(user['password'], password):
             return render('Password is incorrect')
 
+        # Log login datetime
+        r = db.execute('UPDATE user SET last_login=datetime(\'now\')'
+                       ' WHERE id=?', (user['id'],))
+        db.commit()
+
         session.clear()
         session['user_id'] = user['id']
 

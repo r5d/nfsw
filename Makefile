@@ -12,7 +12,7 @@ VENV_CMD=virtualenv-3
 JSHINT=~/.npm-packages/bin/jshint
 
 PRD_HOST=vela
-PRD_WHEEL=nfsw-0.1.0.dev8-py3-none-any.whl
+PRD_WHEEL=nfsw-0.1.0-py3-none-any.whl
 
 ACME_CONF=etc/acme-client.conf
 UWSGI_INI=etc/uwsgi/nfsw.ini

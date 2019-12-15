@@ -204,5 +204,5 @@ def load_logged_in_user():
         ).fetchone()
 
         if (request.endpoint not in ['auth.terms', 'auth.sorry', 'static']
-            and g.user['terms_agreed'] != 1):
+            and g.user and g.user['terms_agreed'] != 1):
             return redirect(url_for('auth.terms'))

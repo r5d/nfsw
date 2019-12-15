@@ -4,3 +4,4 @@ graft nfsw/junk
 graft nfsw/static
 graft nfsw/templates
 global-exclude *.pyc
+global-exclude *~

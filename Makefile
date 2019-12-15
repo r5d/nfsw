@@ -7,12 +7,16 @@
 #   This file is part of nfsw.
 #
 
+VERSION=0.1.0
+
 VENV_DIR=/usr/local/virtualenv/.nfsw
 VENV_CMD=virtualenv-3
 JSHINT=~/.npm-packages/bin/jshint
 
+TARBALL=nfsw-${VERSION}.tar.gz
+
 PRD_HOST=vela
-PRD_WHEEL=nfsw-0.1.0-py3-none-any.whl
+PRD_WHEEL=nfsw-${VERSION}-py3-none-any.whl
 
 ACME_CONF=etc/acme-client.conf
 UWSGI_INI=etc/uwsgi/nfsw.ini
@@ -57,6 +61,15 @@ jsh:
 build:
 	python setup.py bdist_wheel
 .PHONY: build
+
+
+archive:
+	mkdir -p archive \
+	&& git archive --format=tar --prefix=nfsw-${VERSION}/ \
+		v${VERSION} | gzip > archive/${TARBALL} \
+	&& gpg2 -sb --armor -o archive/${TARBALL}.sig archive/${TARBALL}
+.PHONY: archive
+
 
 prd-init:
 	ssh root@${PRD_HOST} \\"echo 'https://cdn.openbsd.org/pub/OpenBSD' \
@@ -167,6 +180,6 @@ prd-tb:
 .PHONY: prd-tb
 
 clean:
-	rm -rf build/ dist/ nfsw.egg-info/ instance
+	rm -rf build/ dist/ nfsw.egg-info/ instance archive/
 	find ./ -type d -name '__pycache__' -exec rm -rf {} +
 .PHONY: clean

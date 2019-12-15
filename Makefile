@@ -70,6 +70,10 @@ archive:
 	&& gpg2 -sb --armor -o archive/${TARBALL}.sig archive/${TARBALL}
 .PHONY: archive
 
+archive-up:
+	rsync archive/* root@lyra:/var/www/root/nfsw/
+.PHONY: archive-up
+
 
 prd-init:
 	ssh root@${PRD_HOST} \\"echo 'https://cdn.openbsd.org/pub/OpenBSD' \

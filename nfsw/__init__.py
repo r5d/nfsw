@@ -9,7 +9,7 @@
 
 import os
 
-from flask import Flask, render_template
+from flask import Flask, render_template, make_response
 
 def create_app(test_config=None):
     # create and configure the app.
@@ -59,6 +59,13 @@ def create_app(test_config=None):
     def nfsw():
         return render_template('nfsw.html')
 
+    @app.route('/robots.txt')
+    @auth.anon_only
+    def robots():
+        resp = make_response(render_template('robots.txt'))
+        resp.headers['Content-Type'] = 'text/plain'
+
+        return resp
 
     return app
 

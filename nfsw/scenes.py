@@ -10,7 +10,7 @@
 import os.path
 import subprocess
 
-from flask import current_app, g
+from flask import current_app, g, session
 
 from nfsw.redis import redis
 from nfsw.util import read_junk
@@ -638,11 +638,42 @@ def bedroom(o):
 def thanks(o):
     r = redis()
 
+    def stats():
+        k = 'players:finished'
+        id = session['user_id']
+
+        if r.r.sismember(k, id):
+            return ''
+
+        r.r.sadd(k, id)
+
+        place = r.r.scard(k)
+
+        # Record place
+        r.set('player:place', place)
+
+        unit = place % 10
+        hund = place % 100
+
+        th = 'th'
+        if place == 1 or (unit == 1 and hund != 1):
+            th = 'st'
+        elif unit == 2 and hund != 1:
+            th = 'nd'
+        elif unit == 3 and hund != 1:
+            th = 'rd'
+
+        return '   You\'re the {}{} person to finish this game!'.format(
+            place, th
+        )
+
     if r.sismember('scenes:done', 'thanks'):
         return 'You\'ve finished the game!'
 
     # Mark scene done
     r.sadd('scenes:done', 'thanks')
 
-    type = r.get('player:type:mind').decode()
-    return read_junk('thanks/solong-{}'.format(type))
+    return '\n'.join([
+        stats(),
+        '\n   - Santa'
+    ])

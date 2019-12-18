@@ -312,7 +312,7 @@ def nymphomaniac(o):
 
 
     def ans_in(q):
-        if 'she leaked':
+        if 'leaked' in q:
             return True
 
         if 'vaginal' in q and 'fluid' in q:

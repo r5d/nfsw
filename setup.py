@@ -15,7 +15,7 @@ with open('README.md', 'r') as f:
 
 setup(
     name='nfsw',
-    version='0.1.8',
+    version='0.1.9',
     license='ISC',
     author='rsiddharth',
     author_email='s@ricketyspace.net',

@@ -7,7 +7,7 @@
 #   This file is part of nfsw.
 #
 
-VERSION=0.1.9
+VERSION=0.2.0
 
 VENV_DIR=/usr/local/virtualenv/.nfsw
 VENV_CMD=virtualenv-3

@@ -1,1 +1,2 @@
 /usr/local/virtualenv/.nfsw-prd/var/nfsw-instance /var/backups/nfsw 20
+/var/redis /var/backups/redis 20

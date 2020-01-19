@@ -312,7 +312,7 @@ def nymphomaniac(o):
 
 
     def ans_in(q):
-        if 'lubricated' in q:
+        if 'lubricate' in q:
             return True
 
         if 'leaked' in q:
